@@ -26,8 +26,10 @@ const sans = Inter({
   display: 'swap',
 });
 
-const SITE_URL =
+// Strip any BOM / whitespace that some shells inject when piping env values.
+const RAW_SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fresh-catch-restaurant.vercel.app';
+const SITE_URL = RAW_SITE_URL.replace(/^﻿/, '').trim();
 
 export const viewport: Viewport = {
   width: 'device-width',

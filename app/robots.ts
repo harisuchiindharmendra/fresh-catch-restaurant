@@ -1,7 +1,8 @@
 import type { MetadataRoute } from 'next';
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fresh-catch.vercel.app';
+const RAW_SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fresh-catch-restaurant.vercel.app';
+const SITE_URL = RAW_SITE_URL.replace(/^﻿/, '').trim();
 
 export default function robots(): MetadataRoute.Robots {
   return {
