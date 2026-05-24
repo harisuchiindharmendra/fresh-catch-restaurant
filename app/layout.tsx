@@ -8,6 +8,9 @@ import CustomCursor from '@/components/effects/CustomCursor';
 import FilmGrain from '@/components/effects/FilmGrain';
 import Vignette from '@/components/effects/Vignette';
 import Aurora from '@/components/effects/Aurora';
+import LightRays from '@/components/effects/LightRays';
+import LiquidFilter from '@/components/effects/LiquidFilter';
+import IntroOverlay from '@/components/effects/IntroOverlay';
 
 const serif = Cormorant_Garamond({
   subsets: ['latin'],
@@ -24,7 +27,7 @@ const sans = Inter({
 });
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fresh-catch.vercel.app';
+  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fresh-catch-restaurant.vercel.app';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -57,11 +60,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'Fresh Catch' }],
   creator: 'Fresh Catch',
   publisher: 'Fresh Catch',
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
+  formatDetection: { email: false, address: false, telephone: false },
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -96,10 +95,7 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: [
-      { url: '/icon.svg', type: 'image/svg+xml' },
-    ],
-    apple: '/apple-icon.png',
+    icon: [{ url: '/icon.svg', type: 'image/svg+xml' }],
   },
 };
 
@@ -111,8 +107,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${serif.variable} ${sans.variable}`}>
       <body className="bg-navy-950 text-ivory antialiased selection:bg-gold/30 selection:text-ivory">
+        <LiquidFilter />
+        <IntroOverlay />
         <SmoothScroll>
           <Aurora />
+          <LightRays />
           <Navigation />
           {children}
           <Footer />

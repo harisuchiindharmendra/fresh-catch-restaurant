@@ -63,7 +63,7 @@ export default function HeroTitle({ lineOne, lineTwo }: Props) {
   return (
     <h1
       ref={containerRef}
-      className="font-serif text-[clamp(2.6rem,7.5vw,7rem)] leading-[1.0] font-light text-ivory text-balance text-shadow-cinema"
+      className="font-serif text-[clamp(3rem,8.6vw,8.4rem)] leading-[0.96] font-light text-ivory text-balance text-shadow-cinema chromatic-edge liquid"
     >
       <span className="block overflow-hidden">
         <span className="hero-line block">

@@ -109,6 +109,49 @@
     -webkit-mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);
     mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);
   }
+
+  .liquid {
+    filter: url(#liquid);
+    -webkit-filter: url(#liquid);
+  }
+
+  .chromatic-edge {
+    text-shadow:
+      0.6px 0 0 rgba(120, 178, 220, 0.45),
+      -0.6px 0 0 rgba(200, 130, 90, 0.35);
+  }
+
+  .editorial-numeral {
+    font-feature-settings: 'lnum' on, 'pnum' on;
+    font-variant-numeric: lining-nums proportional-nums;
+  }
+
+  .scrim-top {
+    background: linear-gradient(180deg, rgba(4,9,18,0.85) 0%, transparent 100%);
+  }
+
+  .scrim-bottom {
+    background: linear-gradient(0deg, rgba(4,9,18,0.95) 0%, transparent 100%);
+  }
+
+  .scrim-radial {
+    background: radial-gradient(60% 50% at 50% 50%, transparent 40%, rgba(4,9,18,0.65) 100%);
+  }
+
+  .text-stroke {
+    -webkit-text-stroke: 1px rgba(245,239,230,0.18);
+    color: transparent;
+  }
+
+  .text-stroke-gold {
+    -webkit-text-stroke: 1px rgba(200,168,106,0.5);
+    color: transparent;
+  }
+
+  .letterbox-bar {
+    background: #040912;
+    box-shadow: 0 0 80px rgba(0,0,0,0.6);
+  }
 }
 
 .film-grain {

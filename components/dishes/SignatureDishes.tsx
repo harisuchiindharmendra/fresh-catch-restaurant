@@ -7,11 +7,18 @@ import { useSceneStore } from '@/store/scene-store';
 import FloatingDish from './FloatingDish';
 import Caustics from '@/components/effects/Caustics';
 
-const positions = [
-  { offsetX: 6, parallax: 80, rotate: -1.2, width: 'w-[68%] lg:w-[40%]', align: 'left' as const },
-  { offsetX: 4, parallax: 140, rotate: 1.4, width: 'w-[72%] lg:w-[46%]', align: 'right' as const },
-  { offsetX: 10, parallax: 100, rotate: -0.8, width: 'w-[66%] lg:w-[38%]', align: 'left' as const },
-  { offsetX: 2, parallax: 170, rotate: 1.0, width: 'w-[74%] lg:w-[48%]', align: 'right' as const },
+const positions: {
+  offsetX: number;
+  parallax: number;
+  rotate: number;
+  width: string;
+  align: 'left' | 'right';
+  numeral: string;
+}[] = [
+  { offsetX: 4, parallax: 90, rotate: -1.2, width: 'w-[78%] lg:w-[42%]', align: 'left', numeral: 'I' },
+  { offsetX: 2, parallax: 150, rotate: 1.4, width: 'w-[82%] lg:w-[48%]', align: 'right', numeral: 'II' },
+  { offsetX: 10, parallax: 110, rotate: -0.8, width: 'w-[72%] lg:w-[38%]', align: 'left', numeral: 'III' },
+  { offsetX: 4, parallax: 180, rotate: 1.0, width: 'w-[84%] lg:w-[50%]', align: 'right', numeral: 'IV' },
 ];
 
 export default function SignatureDishes() {
@@ -23,35 +30,36 @@ export default function SignatureDishes() {
     registerGSAP();
     const ctx = gsap.context(() => {
       gsap.from(headingRef.current?.children || [], {
-        y: 80,
+        y: 100,
         opacity: 0,
-        duration: 1.6,
-        stagger: 0.14,
+        duration: 1.8,
+        stagger: 0.16,
         ease: 'expo.out',
         scrollTrigger: { trigger: headingRef.current, start: 'top 75%' },
       });
 
       gsap.utils.toArray<HTMLElement>('.floating-dish').forEach((el, i) => {
+        const direction = i % 2 === 0 ? -40 : 40;
         gsap.from(el, {
-          y: 140,
+          y: 160,
+          x: direction,
           opacity: 0,
-          duration: 1.8,
+          duration: 2,
           ease: 'expo.out',
           delay: (i % 2) * 0.18,
-          scrollTrigger: { trigger: el, start: 'top 85%' },
+          scrollTrigger: { trigger: el, start: 'top 88%' },
         });
       });
 
-      // sibling defocus on hover (group-style cross-component effect)
       const items = gsap.utils.toArray<HTMLElement>('.floating-dish');
       items.forEach((el) => {
         el.addEventListener('mouseenter', () => {
           items.forEach((other) => {
             if (other !== el) {
               gsap.to(other, {
-                opacity: 0.32,
-                filter: 'blur(6px)',
-                duration: 0.8,
+                opacity: 0.22,
+                filter: 'blur(8px) saturate(0.5)',
+                duration: 0.9,
                 ease: 'power3.out',
               });
             }
@@ -62,7 +70,7 @@ export default function SignatureDishes() {
           items.forEach((other) => {
             gsap.to(other, {
               opacity: 1,
-              filter: 'blur(0px)',
+              filter: 'blur(0px) saturate(1)',
               duration: 0.9,
               ease: 'power3.out',
             });
@@ -85,33 +93,43 @@ export default function SignatureDishes() {
     <section
       id="dishes"
       ref={ref}
-      className="relative bg-navy-950 pt-40 pb-72 lg:pt-56 lg:pb-96 overflow-hidden"
+      className="relative bg-navy-950 pt-44 pb-80 lg:pt-60 lg:pb-[26rem] overflow-hidden"
     >
       <Caustics intensity={0.25} />
 
-      <div className="relative mx-auto max-w-[1500px] px-6 lg:px-12">
-        <header
-          ref={headingRef}
-          className="max-w-3xl mb-40 lg:mb-56 mix-blend-difference"
-        >
-          <div className="flex items-center gap-4 mb-8">
-            <span className="block h-px w-12 bg-gold" />
-            <p className="text-[10px] uppercase tracking-[0.5em] text-gold">
-              02 — The Menu
-            </p>
-          </div>
-          <h2 className="font-serif text-[clamp(2.4rem,6vw,5.5rem)] leading-[0.98] text-ivory font-light">
-            A short list.
+      {/* monumental chapter mark */}
+      <div className="pointer-events-none absolute top-20 left-6 lg:left-12 flex items-end gap-5 z-10">
+        <span className="font-serif italic text-[clamp(4rem,7vw,7rem)] leading-none text-gold/95 editorial-numeral">
+          II
+        </span>
+        <div className="pb-3 flex flex-col gap-1.5">
+          <span className="block h-px w-12 bg-gold" />
+          <span className="text-[10px] uppercase tracking-[0.4em] text-ivory/80">
+            The Menu
+          </span>
+          <span className="text-[10px] uppercase tracking-[0.3em] text-muted">
+            A study in restraint
+          </span>
+        </div>
+      </div>
+
+      <div className="relative mx-auto max-w-[1600px] px-6 lg:px-12">
+        <header ref={headingRef} className="max-w-3xl mb-44 lg:mb-60 mt-32">
+          <h2 className="font-serif text-[clamp(2.6rem,7vw,6rem)] leading-[0.95] text-ivory font-light">
+            Four plates.
             <br />
-            <span className="italic text-ivory/55">Each plate, a study.</span>
+            <span className="italic text-ivory/55">Each, an argument.</span>
           </h2>
-          <p className="mt-10 max-w-xl text-ivory/55 text-base leading-[1.85] font-light">
-            We change the menu with the tide. Four dishes the kitchen has
-            refused to take off the pass — artifacts, not menu items.
+          <p className="mt-12 max-w-xl text-ivory/55 text-base leading-[1.9] font-light">
+            We change the menu with the tide. Below, four plates the kitchen
+            has refused to take off the pass — artifacts, not menu items.
+          </p>
+          <p className="mt-6 text-[10px] uppercase tracking-[0.5em] text-gold/80">
+            Hover · Observe · Recede
           </p>
         </header>
 
-        <div className="stage-3d space-y-56 lg:space-y-72">
+        <div className="stage-3d space-y-72 lg:space-y-[26rem]">
           {dishes.map((dish, i) => (
             <FloatingDish
               key={dish.name}

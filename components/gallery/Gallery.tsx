@@ -9,14 +9,14 @@ import { pointer } from '@/lib/pointer';
 import { getReducedMotion, isMobile } from '@/lib/scroll';
 
 const layout: { col: string; row: string; z: number; aspect: string; offsetY: number }[] = [
-  { col: 'col-span-6 lg:col-span-3', row: 'row-span-2', z: -60, aspect: 'aspect-[3/4]', offsetY: 0 },
-  { col: 'col-span-6 lg:col-span-4', row: 'row-span-1', z: 0, aspect: 'aspect-[4/3]', offsetY: 40 },
-  { col: 'col-span-6 lg:col-span-3', row: 'row-span-1', z: -100, aspect: 'aspect-square', offsetY: -20 },
-  { col: 'col-span-6 lg:col-span-2', row: 'row-span-1', z: 60, aspect: 'aspect-square', offsetY: 80 },
-  { col: 'col-span-6 lg:col-span-5', row: 'row-span-1', z: -40, aspect: 'aspect-[4/3]', offsetY: 0 },
-  { col: 'col-span-6 lg:col-span-3', row: 'row-span-2', z: 30, aspect: 'aspect-[3/4]', offsetY: 40 },
-  { col: 'col-span-6 lg:col-span-2', row: 'row-span-1', z: -80, aspect: 'aspect-square', offsetY: -10 },
-  { col: 'col-span-6 lg:col-span-2', row: 'row-span-1', z: 0, aspect: 'aspect-square', offsetY: 60 },
+  { col: 'col-span-6 lg:col-span-3', row: 'row-span-2', z: -90, aspect: 'aspect-[3/4]', offsetY: 20 },
+  { col: 'col-span-6 lg:col-span-4', row: 'row-span-1', z: 30, aspect: 'aspect-[4/3]', offsetY: 60 },
+  { col: 'col-span-6 lg:col-span-3', row: 'row-span-1', z: -160, aspect: 'aspect-square', offsetY: -30 },
+  { col: 'col-span-6 lg:col-span-2', row: 'row-span-1', z: 80, aspect: 'aspect-square', offsetY: 100 },
+  { col: 'col-span-6 lg:col-span-5', row: 'row-span-1', z: -50, aspect: 'aspect-[4/3]', offsetY: 0 },
+  { col: 'col-span-6 lg:col-span-3', row: 'row-span-2', z: 50, aspect: 'aspect-[3/4]', offsetY: 50 },
+  { col: 'col-span-6 lg:col-span-2', row: 'row-span-1', z: -120, aspect: 'aspect-square', offsetY: -10 },
+  { col: 'col-span-6 lg:col-span-2', row: 'row-span-1', z: 10, aspect: 'aspect-square', offsetY: 80 },
 ];
 
 export default function Gallery() {
@@ -28,10 +28,10 @@ export default function Gallery() {
     registerGSAP();
     const ctx = gsap.context(() => {
       gsap.from('.gallery-heading > *', {
-        y: 80,
+        y: 100,
         opacity: 0,
-        duration: 1.4,
-        stagger: 0.14,
+        duration: 1.6,
+        stagger: 0.16,
         ease: 'expo.out',
         scrollTrigger: { trigger: '.gallery-heading', start: 'top 80%' },
       });
@@ -39,37 +39,37 @@ export default function Gallery() {
       gsap.utils.toArray<HTMLElement>('.g-item').forEach((el, i) => {
         gsap.fromTo(
           el,
-          { y: 120, opacity: 0, scale: 0.94 },
+          { y: 140, opacity: 0, scale: 0.92, rotate: i % 2 === 0 ? -1.5 : 1.5 },
           {
             y: 0,
             opacity: 1,
             scale: 1,
-            duration: 1.6,
+            rotate: 0,
+            duration: 1.8,
             ease: 'expo.out',
-            scrollTrigger: { trigger: el, start: 'top 90%' },
+            scrollTrigger: { trigger: el, start: 'top 92%' },
             delay: (i % 4) * 0.08,
           }
         );
       });
 
-      // hover defocus
       const items = gsap.utils.toArray<HTMLElement>('.g-item');
       items.forEach((el) => {
         const inner = el.querySelector<HTMLElement>('.g-tilt');
         if (!inner) return;
         el.addEventListener('mouseenter', () => {
           gsap.to(inner, {
-            scale: 1.06,
-            z: 120,
-            duration: 0.9,
+            scale: 1.1,
+            z: 220,
+            duration: 1,
             ease: 'power3.out',
           });
           items.forEach((other) => {
             if (other !== el) {
               gsap.to(other, {
-                opacity: 0.32,
-                filter: 'blur(8px) saturate(0.6)',
-                duration: 0.7,
+                opacity: 0.18,
+                filter: 'blur(10px) saturate(0.5)',
+                duration: 0.8,
                 ease: 'power3.out',
               });
             }
@@ -79,14 +79,14 @@ export default function Gallery() {
           gsap.to(inner, {
             scale: 1,
             z: 0,
-            duration: 1,
+            duration: 1.1,
             ease: 'power3.out',
           });
           items.forEach((other) => {
             gsap.to(other, {
               opacity: 1,
               filter: 'blur(0px) saturate(1)',
-              duration: 0.9,
+              duration: 1,
               ease: 'power3.out',
             });
           });
@@ -104,7 +104,6 @@ export default function Gallery() {
     return () => ctx.revert();
   }, [setActiveScene]);
 
-  // cursor tilt on whole stage
   useEffect(() => {
     const stage = stageRef.current;
     if (!stage || getReducedMotion() || isMobile()) return;
@@ -112,8 +111,8 @@ export default function Gallery() {
     let rx = 0;
     let ry = 0;
     const tick = () => {
-      const targetRX = -(pointer.lerpNY - 0.5) * 4;
-      const targetRY = (pointer.lerpNX - 0.5) * 5;
+      const targetRX = -(pointer.lerpNY - 0.5) * 5;
+      const targetRY = (pointer.lerpNX - 0.5) * 6;
       rx += (targetRX - rx) * 0.06;
       ry += (targetRY - ry) * 0.06;
       stage.style.transform = `rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(
@@ -129,30 +128,40 @@ export default function Gallery() {
     <section
       id="gallery"
       ref={ref}
-      className="relative bg-navy-950 py-40 lg:py-56 overflow-hidden"
+      className="relative bg-navy-950 py-44 lg:py-60 overflow-hidden"
     >
-      <div className="mx-auto max-w-[1600px] px-6 lg:px-12">
-        <header className="gallery-heading max-w-3xl mb-24">
-          <div className="flex items-center gap-4 mb-8">
-            <span className="block h-px w-12 bg-gold" />
-            <p className="text-[10px] uppercase tracking-[0.5em] text-gold">
-              05 — Moments
-            </p>
-          </div>
-          <h2 className="font-serif text-[clamp(2.4rem,6vw,5.5rem)] leading-[0.98] text-ivory font-light">
+      {/* chapter mark */}
+      <div className="pointer-events-none absolute top-20 left-6 lg:left-12 flex items-end gap-5 z-10">
+        <span className="font-serif italic text-[clamp(4rem,7vw,7rem)] leading-none text-gold/95 editorial-numeral">
+          V
+        </span>
+        <div className="pb-3 flex flex-col gap-1.5">
+          <span className="block h-px w-12 bg-gold" />
+          <span className="text-[10px] uppercase tracking-[0.4em] text-ivory/80">
+            Memory
+          </span>
+          <span className="text-[10px] uppercase tracking-[0.3em] text-muted">
+            Eight nights at the pass
+          </span>
+        </div>
+      </div>
+
+      <div className="mx-auto max-w-[1700px] px-6 lg:px-12">
+        <header className="gallery-heading max-w-3xl mb-28 mt-32">
+          <h2 className="font-serif text-[clamp(2.6rem,7vw,6rem)] leading-[0.95] text-ivory font-light">
             Quiet pleasures,
             <br />
             <span className="italic text-ivory/55">remembered later.</span>
           </h2>
+          <p className="mt-10 max-w-xl text-ivory/55 text-base leading-[1.85] font-light">
+            Hover any frame — the others recede. A small physics for memory.
+          </p>
         </header>
 
-        <div
-          className="stage-3d"
-          style={{ perspective: '1800px' }}
-        >
+        <div className="stage-3d" style={{ perspective: '2200px' }}>
           <div
             ref={stageRef}
-            className="grid grid-cols-6 lg:grid-cols-12 auto-rows-[180px] lg:auto-rows-[220px] gap-3 lg:gap-5 will-change-transform"
+            className="grid grid-cols-6 lg:grid-cols-12 auto-rows-[180px] lg:auto-rows-[240px] gap-3 lg:gap-5 will-change-transform"
             style={{ transformStyle: 'preserve-3d', transition: 'transform 0.05s linear' }}
           >
             {gallery.map((g, i) => {

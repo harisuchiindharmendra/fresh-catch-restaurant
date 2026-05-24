@@ -27,12 +27,40 @@ export default function ChefStory() {
   const portraitRef = useRef<HTMLDivElement>(null);
   const lightRef = useRef<HTMLDivElement>(null);
   const subtitleRef = useRef<HTMLDivElement>(null);
+  const letterboxTopRef = useRef<HTMLDivElement>(null);
+  const letterboxBottomRef = useRef<HTMLDivElement>(null);
+  const sideTypeRef = useRef<HTMLDivElement>(null);
   const setActiveScene = useSceneStore((s) => s.setActiveScene);
 
   useEffect(() => {
     registerGSAP();
     const ctx = gsap.context(() => {
-      // portrait crop reveal + parallax
+      // letterbox bars pinch in then open as you scroll past
+      gsap.fromTo(
+        [letterboxTopRef.current, letterboxBottomRef.current],
+        { scaleY: 0 },
+        {
+          scaleY: 1,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: ref.current,
+            start: 'top 90%',
+            end: 'top 30%',
+            scrub: 1.4,
+          },
+        }
+      );
+      gsap.to([letterboxTopRef.current, letterboxBottomRef.current], {
+        scaleY: 0,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: ref.current,
+          start: 'bottom 70%',
+          end: 'bottom 20%',
+          scrub: 1.4,
+        },
+      });
+
       gsap.fromTo(
         '.chef-frame-inner',
         { scale: 1.25, opacity: 0 },
@@ -67,7 +95,22 @@ export default function ChefStory() {
         },
       });
 
-      // documentary subtitle slide-up
+      // image desaturates as it enters
+      gsap.fromTo(
+        '.chef-grade',
+        { backdropFilter: 'saturate(0)', opacity: 1 },
+        {
+          opacity: 0,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: ref.current,
+            start: 'top 70%',
+            end: 'top 30%',
+            scrub: 1.2,
+          },
+        }
+      );
+
       gsap.from(subtitleRef.current, {
         y: 30,
         opacity: 0,
@@ -76,7 +119,18 @@ export default function ChefStory() {
         scrollTrigger: { trigger: ref.current, start: 'top 60%' },
       });
 
-      // chapter label sweep
+      // vertical side type slides up as scroll
+      gsap.to(sideTypeRef.current, {
+        yPercent: -55,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: ref.current,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1.4,
+        },
+      });
+
       gsap.from('.chef-chapter > *', {
         y: 50,
         opacity: 0,
@@ -98,7 +152,15 @@ export default function ChefStory() {
         }
       );
 
-      // word-by-word documentary reveal driven by scroll progress
+      // drop cap drift
+      gsap.from('.chef-drop-cap', {
+        x: -40,
+        opacity: 0,
+        duration: 1.6,
+        ease: 'expo.out',
+        scrollTrigger: { trigger: '.chef-narration', start: 'top 80%' },
+      });
+
       gsap.utils
         .toArray<HTMLElement>('.chef-narration .word-fade')
         .forEach((el, i, arr) => {
@@ -120,7 +182,6 @@ export default function ChefStory() {
           );
         });
 
-      // attribution
       gsap.from('.chef-attr > *', {
         y: 30,
         opacity: 0,
@@ -130,7 +191,6 @@ export default function ChefStory() {
         scrollTrigger: { trigger: '.chef-attr', start: 'top 88%' },
       });
 
-      // light sweep across portrait driven by scroll
       gsap.fromTo(
         '.chef-light-sweep',
         { backgroundPosition: '-120% 0' },
@@ -176,7 +236,7 @@ export default function ChefStory() {
       ly += (targetY - ly) * 0.07;
       el.style.background = `radial-gradient(circle at ${lx.toFixed(
         1
-      )}% ${ly.toFixed(1)}%, rgba(200,168,106,0.22), transparent 55%)`;
+      )}% ${ly.toFixed(1)}%, rgba(200,168,106,0.24), transparent 55%)`;
       raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
@@ -187,14 +247,56 @@ export default function ChefStory() {
     <section
       id="chef"
       ref={ref}
-      className="relative bg-navy-950 py-40 lg:py-56 overflow-hidden"
+      className="relative bg-navy-950 py-44 lg:py-60 overflow-hidden"
     >
-      <div className="mx-auto max-w-[1500px] px-6 lg:px-12 grid grid-cols-12 gap-10 lg:gap-20 items-center">
+      {/* letterbox bars */}
+      <div
+        ref={letterboxTopRef}
+        aria-hidden
+        className="letterbox-bar absolute inset-x-0 top-0 h-12 lg:h-16 z-30 origin-top will-change-transform"
+      />
+      <div
+        ref={letterboxBottomRef}
+        aria-hidden
+        className="letterbox-bar absolute inset-x-0 bottom-0 h-12 lg:h-16 z-30 origin-bottom will-change-transform"
+      />
+
+      {/* vertical side type running down the right edge */}
+      <div
+        ref={sideTypeRef}
+        aria-hidden
+        className="hidden lg:block absolute right-6 top-0 z-20 origin-top will-change-transform"
+      >
+        <span
+          className="block font-serif italic text-[clamp(8rem,18vw,18rem)] leading-none text-stroke editorial-numeral whitespace-nowrap"
+          style={{ writingMode: 'vertical-rl' }}
+        >
+          Twenty
+        </span>
+      </div>
+
+      {/* chapter mark */}
+      <div className="pointer-events-none absolute top-20 left-6 lg:left-12 flex items-end gap-5 z-20">
+        <span className="font-serif italic text-[clamp(4rem,7vw,7rem)] leading-none text-gold/95 editorial-numeral">
+          III
+        </span>
+        <div className="pb-3 flex flex-col gap-1.5">
+          <span className="block h-px w-12 bg-gold" />
+          <span className="text-[10px] uppercase tracking-[0.4em] text-ivory/80">
+            The Chef
+          </span>
+          <span className="text-[10px] uppercase tracking-[0.3em] text-muted">
+            Documentary · 02:17
+          </span>
+        </div>
+      </div>
+
+      <div className="mx-auto max-w-[1500px] px-6 lg:px-12 grid grid-cols-12 gap-10 lg:gap-20 items-center mt-24 lg:mt-0">
         {/* Portrait */}
-        <div className="col-span-12 lg:col-span-6">
+        <div className="col-span-12 lg:col-span-7">
           <div
             ref={portraitRef}
-            className="chef-frame relative aspect-[4/5] overflow-hidden"
+            className="chef-frame relative aspect-[4/5] lg:aspect-[5/6] overflow-hidden"
           >
             <div className="chef-frame-mask absolute inset-0 overflow-hidden">
               <div className="chef-frame-inner absolute inset-0 -top-10 -bottom-10 will-change-transform">
@@ -209,7 +311,6 @@ export default function ChefStory() {
               <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/20 to-transparent" />
               <div className="absolute inset-0 bg-gradient-to-tr from-navy-950/60 via-transparent to-transparent" />
 
-              {/* scrolling light sweep */}
               <div
                 className="chef-light-sweep absolute inset-0 mix-blend-overlay opacity-60"
                 style={{
@@ -219,10 +320,15 @@ export default function ChefStory() {
                 }}
               />
 
-              {/* cursor spotlight */}
               <div
                 ref={lightRef}
                 className="absolute inset-0 mix-blend-screen pointer-events-none"
+              />
+
+              {/* desaturation grade overlay */}
+              <div
+                aria-hidden
+                className="chef-grade absolute inset-0 mix-blend-color bg-navy-900 pointer-events-none"
               />
             </div>
 
@@ -233,36 +339,45 @@ export default function ChefStory() {
             >
               <span className="h-px flex-1 bg-gold/40" />
               <span className="text-[10px] uppercase tracking-[0.4em] text-ivory/70">
-                Service No. 4128 · 02:17
+                Service No. 4128 · Take 03
               </span>
             </div>
           </div>
         </div>
 
         {/* Story */}
-        <div className="col-span-12 lg:col-span-6 space-y-12">
+        <div className="col-span-12 lg:col-span-5 space-y-12">
           <div className="chef-chapter flex items-center gap-4">
             <span className="block h-px w-12 bg-gold" />
             <p className="text-[10px] uppercase tracking-[0.5em] text-gold">
-              03 — The Chef
+              In conversation with
             </p>
           </div>
 
-          <h2 className="chef-headline font-serif text-[clamp(2.4rem,5vw,4.8rem)] leading-[0.98] text-ivory font-light">
+          <h2 className="chef-headline font-serif text-[clamp(2.6rem,5vw,5rem)] leading-[0.96] text-ivory font-light">
             <span className="block overflow-hidden">
-              <span className="block">Twenty years at the pass.</span>
+              <span className="block">Twenty years</span>
+            </span>
+            <span className="block overflow-hidden">
+              <span className="block">at the pass.</span>
             </span>
             <span className="block overflow-hidden italic text-ivory/55">
               <span className="block">Still curious.</span>
             </span>
           </h2>
 
-          <div className="chef-narration space-y-8 text-ivory/75 text-base lg:text-lg leading-[1.9] max-w-lg font-light">
+          <div className="chef-narration relative space-y-8 text-ivory/75 text-base lg:text-lg leading-[1.9] max-w-lg font-light">
+            <span
+              aria-hidden
+              className="chef-drop-cap pointer-events-none absolute -left-2 -top-6 font-serif italic editorial-numeral text-[8rem] leading-none text-gold/30 select-none"
+            >
+              &ldquo;
+            </span>
             {paragraphs.map((p, i) => (
               <p key={i}>{splitWords(p)}</p>
             ))}
             <p className="font-serif italic text-xl lg:text-2xl text-gold/90 leading-snug">
-              {splitWords(`“${quote}”`)}
+              {splitWords(`${quote}`)}
             </p>
           </div>
 
