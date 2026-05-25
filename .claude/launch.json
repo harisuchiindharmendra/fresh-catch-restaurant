@@ -3,8 +3,14 @@
   "configurations": [
     {
       "name": "fresh-catch-dev",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
+      "runtimeExecutable": "cmd.exe",
+      "runtimeArgs": ["/d", "/c", "cd /d C:\\Users\\dharm\\fresh-catch-restaurant && npm run dev"],
+      "port": 3000
+    },
+    {
+      "name": "fresh-catch-prod",
+      "runtimeExecutable": "cmd.exe",
+      "runtimeArgs": ["/d", "/c", "cd /d C:\\Users\\dharm\\fresh-catch-restaurant && npm run build && npm start"],
       "port": 3000
     }
   ]

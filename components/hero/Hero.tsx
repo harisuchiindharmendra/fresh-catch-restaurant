@@ -5,6 +5,7 @@ import HeroVideo from './HeroVideo';
 import HeroParticles from './HeroParticles';
 import HeroTitle from './HeroTitle';
 import Caustics from '@/components/effects/Caustics';
+import HeroMarineLayer from '@/components/3d/HeroMarineLayer';
 import MagneticButton from '@/components/ui/MagneticButton';
 import { useSceneStore } from '@/store/scene-store';
 import { registerGSAP, gsap, ScrollTrigger } from '@/lib/gsap';
@@ -145,9 +146,11 @@ export default function Hero() {
         <div className="hero-deep absolute inset-0 bg-navy-950 opacity-0" />
       </div>
 
-      {/* mid layer — caustics + particles */}
+      {/* mid layer — caustics + particles + marine floaters */}
       <Caustics intensity={0.55} />
       <HeroParticles />
+      <HeroMarineLayer />
+      {/* MarineLayer note: now Canvas2D-based to avoid R3F hydration cascade */}
 
       {/* chapter mark — top-left */}
       <div

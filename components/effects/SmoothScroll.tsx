@@ -22,12 +22,12 @@ export default function SmoothScroll({
     if (getReducedMotion()) return;
 
     const lenis = new Lenis({
-      duration: 1.6,
-      easing: (t: number) => 1 - Math.pow(1 - t, 4),
+      duration: 1.8,
+      easing: (t: number) => 1 - Math.pow(1 - t, 5),
       smoothWheel: true,
-      wheelMultiplier: 0.95,
-      touchMultiplier: 1.8,
-      lerp: 0.085,
+      wheelMultiplier: 0.85,
+      touchMultiplier: 1.6,
+      lerp: 0.072,
     });
 
     let lastVelocityBucket = 0;

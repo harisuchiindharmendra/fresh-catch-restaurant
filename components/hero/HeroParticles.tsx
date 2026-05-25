@@ -41,9 +41,12 @@ export default function HeroParticles() {
       tone: 'gold' | 'ivory' | 'cyan';
     };
 
-    const density = isMobile() ? 40000 : 16000;
-    const count = Math.min(110, Math.floor((window.innerWidth * window.innerHeight) / density));
+    const density = isMobile() ? 40000 : 14000;
+    const count = Math.min(130, Math.floor((window.innerWidth * window.innerHeight) / density));
+    const orbCount = isMobile() ? 0 : 8;
     const particles: Particle[] = [];
+    type Orb = { x: number; y: number; r: number; vy: number; phase: number; tone: 'gold' | 'cyan' | 'ivory' };
+    const orbs: Orb[] = [];
 
     const reset = () => {
       particles.length = 0;
@@ -63,11 +66,55 @@ export default function HeroParticles() {
           tone,
         });
       }
+      orbs.length = 0;
+      for (let i = 0; i < orbCount; i++) {
+        const tonePick = Math.random();
+        const tone: Orb['tone'] = tonePick < 0.55 ? 'gold' : tonePick < 0.85 ? 'cyan' : 'ivory';
+        orbs.push({
+          x: Math.random() * w,
+          y: Math.random() * h * 0.9 + h * 0.05,
+          r: 110 + Math.random() * 180,
+          vy: -0.05 - Math.random() * 0.08,
+          phase: Math.random() * Math.PI * 2,
+          tone,
+        });
+      }
     };
 
     const draw = () => {
       ctx.clearRect(0, 0, w, h);
       const cursorActive = pointer.active;
+
+      // ambient orbs — large soft halos drifting up, no inner detail (depth feel)
+      for (const o of orbs) {
+        o.phase += 0.0035;
+        o.y += o.vy;
+        if (o.y < -o.r) {
+          o.y = h + o.r;
+          o.x = Math.random() * w;
+        }
+        const driftX = o.x + Math.sin(o.phase) * 30;
+        const driftY = o.y + Math.cos(o.phase * 0.7) * 18;
+        const g = ctx.createRadialGradient(driftX, driftY, 0, driftX, driftY, o.r);
+        if (o.tone === 'gold') {
+          g.addColorStop(0, 'rgba(200,168,106,0.18)');
+          g.addColorStop(0.5, 'rgba(200,168,106,0.04)');
+          g.addColorStop(1, 'rgba(200,168,106,0)');
+        } else if (o.tone === 'cyan') {
+          g.addColorStop(0, 'rgba(120,178,220,0.14)');
+          g.addColorStop(0.5, 'rgba(120,178,220,0.04)');
+          g.addColorStop(1, 'rgba(120,178,220,0)');
+        } else {
+          g.addColorStop(0, 'rgba(245,239,230,0.10)');
+          g.addColorStop(0.5, 'rgba(245,239,230,0.03)');
+          g.addColorStop(1, 'rgba(245,239,230,0)');
+        }
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(driftX, driftY, o.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
       for (const p of particles) {
         // base drift
         p.x += p.vx + scrollState.lerpVelocity * 0.04 * (1 - p.z);

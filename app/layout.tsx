@@ -11,6 +11,7 @@ import Aurora from '@/components/effects/Aurora';
 import LightRays from '@/components/effects/LightRays';
 import LiquidFilter from '@/components/effects/LiquidFilter';
 import IntroOverlay from '@/components/effects/IntroOverlay';
+import SceneTransition from '@/components/effects/SceneTransition';
 
 const serif = Cormorant_Garamond({
   subsets: ['latin'],
@@ -114,6 +115,7 @@ export default function RootLayout({
         <SmoothScroll>
           <Aurora />
           <LightRays />
+          <SceneTransition />
           <Navigation />
           {children}
           <Footer />

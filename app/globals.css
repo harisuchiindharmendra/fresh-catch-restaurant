@@ -191,6 +191,24 @@
   100% { background-position: 200% 0; }
 }
 
+.cursor-ripple {
+  width: 14px;
+  height: 14px;
+  transform: translate(-50%, -50%) scale(0.6);
+  opacity: 0;
+  transition: none;
+}
+
+.cursor-ripple.rippling {
+  animation: cursorSonar 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes cursorSonar {
+  0%   { transform: translate(-50%, -50%) scale(0.5);  opacity: 0.55; }
+  60%  { opacity: 0.32; }
+  100% { transform: translate(-50%, -50%) scale(7);    opacity: 0; }
+}
+
 /* Lenis baseline styles */
 html.lenis,
 html.lenis body {
