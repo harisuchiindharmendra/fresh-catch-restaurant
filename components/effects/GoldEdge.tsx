@@ -23,7 +23,8 @@ export default function GoldEdge() {
     let raf = 0;
     let t = 0;
     const tick = () => {
-      t += 0.0007;
+      // ~3-minute cycle. You will not see this move.
+      t += 0.00022;
       const p = scrollState.progress;
       const goldX = 78 + Math.sin(t) * 4 + p * 8;
       const goldY = 22 + Math.cos(t * 0.7) * 3 - p * 6;

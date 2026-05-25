@@ -23,7 +23,7 @@ export default function AmbientMist() {
     const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     let w = 0;
     let h = 0;
-    const COUNT = 6;
+    const COUNT = 4;
     type Mote = { x: number; y: number; r: number; vy: number; phase: number; opacity: number };
     const motes: Mote[] = [];
 
@@ -41,10 +41,10 @@ export default function AmbientMist() {
         motes.push({
           x: Math.random() * w,
           y: Math.random() * h,
-          r: 80 + Math.random() * 140,
-          vy: -0.04 - Math.random() * 0.06,
+          r: 100 + Math.random() * 180,
+          vy: -0.03 - Math.random() * 0.05,
           phase: Math.random() * Math.PI * 2,
-          opacity: 0.04 + Math.random() * 0.07,
+          opacity: 0.03 + Math.random() * 0.05,
         });
       }
     };
