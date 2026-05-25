@@ -32,8 +32,10 @@ export default function MinimalCursor() {
 
     let scale = 1;
     let targetScale = 1;
-    let opacity = 0.7;
-    let targetOpacity = 0.7;
+    let opacity = 0.65;
+    let targetOpacity = 0.65;
+    let glow = 0;
+    let targetGlow = 0;
 
     const updateHover = (e: PointerEvent) => {
       const target = e.target as HTMLElement | null;
@@ -42,11 +44,13 @@ export default function MinimalCursor() {
         'a, button, input, select, textarea, [data-cursor], [role="button"]'
       );
       if (interactive) {
-        targetScale = 1.5;
+        targetScale = 1.6;
         targetOpacity = 1;
+        targetGlow = 1;
       } else {
         targetScale = 1;
-        targetOpacity = 0.7;
+        targetOpacity = 0.65;
+        targetGlow = 0;
       }
     };
 
@@ -54,12 +58,17 @@ export default function MinimalCursor() {
 
     let raf = 0;
     const tick = () => {
-      scale += (targetScale - scale) * 0.14;
-      opacity += (targetOpacity - opacity) * 0.14;
+      scale += (targetScale - scale) * 0.12;
+      opacity += (targetOpacity - opacity) * 0.12;
+      glow += (targetGlow - glow) * 0.12;
       dot.style.transform = `translate3d(${pointer.x}px, ${pointer.y}px, 0) translate(-50%, -50%) scale(${scale.toFixed(
         3
       )})`;
       dot.style.opacity = opacity.toFixed(3);
+      dot.style.boxShadow = `0 0 ${(8 + glow * 16).toFixed(1)}px rgba(245,239,230,${(
+        0.15 +
+        glow * 0.35
+      ).toFixed(2)})`;
       raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);

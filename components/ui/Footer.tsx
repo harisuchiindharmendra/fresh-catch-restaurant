@@ -2,50 +2,59 @@ import { siteConfig } from '@/lib/config';
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-ivory/5 bg-navy-950 px-6 lg:px-12 py-16">
-      <div className="mx-auto max-w-[1400px] grid grid-cols-1 md:grid-cols-4 gap-12">
-        <div className="space-y-4">
-          <h3 className="font-serif text-2xl text-ivory">Fresh Catch</h3>
-          <p className="text-sm text-muted leading-relaxed max-w-xs">
-            Cinematic seafood. Served slowly. Remembered always.
-          </p>
+    <footer className="relative bg-navy-950 px-8 lg:px-16 pt-40 pb-20">
+      <div className="mx-auto max-w-[1500px]">
+        <div className="grid grid-cols-12 gap-y-16 gap-x-8 items-end">
+          <div className="col-span-12 lg:col-span-5 space-y-5">
+            <h3 className="font-serif italic text-3xl text-ivory/90">
+              Fresh Catch
+            </h3>
+            <p className="text-[15px] text-ivory/45 leading-[1.85] font-light max-w-xs">
+              Served slowly. Remembered always.
+            </p>
+          </div>
+
+          <div className="col-span-6 lg:col-span-2 space-y-3">
+            <p className="text-[10px] uppercase tracking-[0.4em] text-ivory/35">
+              Visit
+            </p>
+            <p className="text-sm text-ivory/70 leading-[1.8] font-light">
+              {siteConfig.address}
+            </p>
+          </div>
+
+          <div className="col-span-6 lg:col-span-2 space-y-3">
+            <p className="text-[10px] uppercase tracking-[0.4em] text-ivory/35">
+              Hours
+            </p>
+            <p className="text-sm text-ivory/70 leading-[1.8] font-light">
+              {siteConfig.hours}
+            </p>
+          </div>
+
+          <div className="col-span-12 lg:col-span-3 space-y-3 lg:text-right">
+            <p className="text-[10px] uppercase tracking-[0.4em] text-ivory/35">
+              Contact
+            </p>
+            <p className="text-sm text-ivory/70 font-light">
+              <a
+                href="tel:+15552473474"
+                className="hover:text-ivory transition-colors duration-700"
+              >
+                {siteConfig.phone}
+              </a>
+            </p>
+          </div>
         </div>
 
-        <div className="space-y-3">
-          <h4 className="text-[10px] uppercase tracking-[0.4em] text-gold">
-            Visit
-          </h4>
-          <p className="text-sm text-ivory/80 leading-relaxed">
-            {siteConfig.address}
+        <div className="mt-28 pt-8 border-t border-ivory/8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-[10px] uppercase tracking-[0.4em] text-ivory/30">
+            © {new Date().getFullYear()} {siteConfig.name}
+          </p>
+          <p className="text-[10px] uppercase tracking-[0.4em] text-ivory/25">
+            All evenings, by reservation
           </p>
         </div>
-
-        <div className="space-y-3">
-          <h4 className="text-[10px] uppercase tracking-[0.4em] text-gold">
-            Hours
-          </h4>
-          <p className="text-sm text-ivory/80 leading-relaxed">
-            {siteConfig.hours}
-          </p>
-        </div>
-
-        <div className="space-y-3">
-          <h4 className="text-[10px] uppercase tracking-[0.4em] text-gold">
-            Contact
-          </h4>
-          <p className="text-sm text-ivory/80 leading-relaxed">
-            {siteConfig.phone}
-          </p>
-        </div>
-      </div>
-
-      <div className="mx-auto max-w-[1400px] mt-16 pt-8 border-t border-ivory/5 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p className="text-xs text-muted">
-          © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
-        </p>
-        <p className="text-[10px] uppercase tracking-[0.4em] text-muted">
-          Crafted with care
-        </p>
       </div>
     </footer>
   );

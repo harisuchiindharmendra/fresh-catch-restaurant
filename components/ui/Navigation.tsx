@@ -7,7 +7,7 @@ const links = [
   { label: 'Menu', href: '#dishes' },
   { label: 'Chef', href: '#chef' },
   { label: 'Room', href: '#dining' },
-  { label: 'Gallery', href: '#gallery' },
+  { label: 'Memory', href: '#gallery' },
   { label: 'Reserve', href: '#reserve' },
 ];
 
@@ -23,43 +23,38 @@ export default function Navigation() {
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-700 ${
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-[900ms] ease-out ${
         scrolled
-          ? 'py-4 backdrop-blur-md bg-navy-900/60 border-b border-ivory/5'
-          : 'py-8 bg-transparent'
+          ? 'py-5 backdrop-blur-md bg-navy-950/50'
+          : 'py-10 bg-transparent'
       }`}
     >
-      <nav className="mx-auto max-w-[1400px] px-6 lg:px-12 flex items-center justify-between">
-        <Link href="/" className="group flex items-center gap-3">
-          <span className="font-serif text-2xl tracking-wide text-ivory">
+      <nav className="mx-auto max-w-[1500px] px-8 lg:px-16 flex items-center justify-between">
+        <Link href="/" className="group flex items-center gap-4">
+          <span className="font-serif italic text-2xl tracking-wide text-ivory/90 group-hover:text-ivory transition-colors duration-700">
             Fresh Catch
           </span>
-          <span className="hidden sm:inline-block h-px w-8 bg-gold/50 group-hover:w-12 transition-all duration-500" />
-          <span className="hidden sm:inline-block text-[10px] uppercase tracking-[0.4em] text-muted">
-            Est. 2014
-          </span>
+          <span className="hidden sm:inline-block h-px w-6 bg-ivory/20 group-hover:w-10 group-hover:bg-ivory/45 transition-all duration-700" />
         </Link>
 
-        <ul className="hidden md:flex items-center gap-10">
+        <ul className="hidden md:flex items-center gap-12">
           {links.map((l) => (
             <li key={l.href}>
               <a
                 href={l.href}
-                className="group relative text-[11px] uppercase tracking-[0.3em] text-ivory/70 hover:text-ivory transition-colors duration-500"
+                className="group relative text-[10px] uppercase tracking-[0.4em] text-ivory/45 hover:text-ivory transition-colors duration-700"
               >
                 {l.label}
-                <span className="absolute -bottom-2 left-0 h-px w-0 bg-gold transition-all duration-700 group-hover:w-full" />
               </a>
             </li>
           ))}
         </ul>
 
         <a
-          href="#reserve"
-          className="hidden md:inline-flex items-center gap-2 border border-ivory/15 hover:border-gold/60 px-5 py-2.5 text-[11px] uppercase tracking-[0.3em] text-ivory hover:text-gold transition-all duration-500"
+          href="tel:+15552473474"
+          className="hidden md:inline-block text-[10px] uppercase tracking-[0.4em] text-ivory/45 hover:text-ivory transition-colors duration-700"
         >
-          Reserve
-          <span aria-hidden>→</span>
+          +1 555 247 FISH
         </a>
 
         <button
@@ -68,12 +63,12 @@ export default function Navigation() {
           className="md:hidden flex flex-col gap-1.5 p-2"
         >
           <span
-            className={`block w-6 h-px bg-ivory transition-transform duration-300 ${
+            className={`block w-6 h-px bg-ivory/80 transition-transform duration-500 ${
               open ? 'translate-y-1.5 rotate-45' : ''
             }`}
           />
           <span
-            className={`block w-6 h-px bg-ivory transition-transform duration-300 ${
+            className={`block w-6 h-px bg-ivory/80 transition-transform duration-500 ${
               open ? '-translate-y-1 -rotate-45' : ''
             }`}
           />
@@ -81,14 +76,14 @@ export default function Navigation() {
       </nav>
 
       {open && (
-        <div className="md:hidden mt-6 px-6 pb-6 border-t border-ivory/5">
-          <ul className="flex flex-col gap-5 pt-6">
+        <div className="md:hidden mt-8 px-8 pb-8 border-t border-ivory/5">
+          <ul className="flex flex-col gap-6 pt-8">
             {links.map((l) => (
               <li key={l.href}>
                 <a
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="text-sm uppercase tracking-[0.3em] text-ivory/80 hover:text-gold transition-colors"
+                  className="text-xs uppercase tracking-[0.4em] text-ivory/70 hover:text-ivory transition-colors"
                 >
                   {l.label}
                 </a>

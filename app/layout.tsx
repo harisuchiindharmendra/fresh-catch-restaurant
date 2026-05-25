@@ -7,6 +7,9 @@ import SmoothScroll from '@/components/effects/SmoothScroll';
 import MinimalCursor from '@/components/effects/MinimalCursor';
 import FilmGrain from '@/components/effects/FilmGrain';
 import Vignette from '@/components/effects/Vignette';
+import GoldEdge from '@/components/effects/GoldEdge';
+import ColorGrade from '@/components/effects/ColorGrade';
+import AmbientMist from '@/components/effects/AmbientMist';
 
 const serif = Cormorant_Garamond({
   subsets: ['latin'],
@@ -105,9 +108,12 @@ export default function RootLayout({
     <html lang="en" className={`${serif.variable} ${sans.variable}`}>
       <body className="bg-navy-950 text-ivory antialiased selection:bg-gold/30 selection:text-ivory">
         <SmoothScroll>
+          <GoldEdge />
+          <AmbientMist />
           <Navigation />
           {children}
           <Footer />
+          <ColorGrade />
           <Vignette />
           <FilmGrain />
           <MinimalCursor />
