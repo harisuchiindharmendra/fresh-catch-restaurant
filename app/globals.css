@@ -152,6 +152,22 @@
     background: #040912;
     box-shadow: 0 0 80px rgba(0,0,0,0.6);
   }
+
+  .cursor-ripple {
+    width: 36px;
+    height: 36px;
+    transform: translate3d(-50%, -50%, 0) scale(0);
+    opacity: 0;
+  }
+
+  .cursor-ripple.rippling {
+    animation: cursorRipple 1.4s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  }
+}
+
+@keyframes cursorRipple {
+  0%   { transform: translate3d(-50%, -50%, 0) scale(0.1);  opacity: 0.85; }
+  100% { transform: translate3d(-50%, -50%, 0) scale(4.6);  opacity: 0; }
 }
 
 .film-grain {

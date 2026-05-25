@@ -4,7 +4,7 @@ import './globals.css';
 import Navigation from '@/components/ui/Navigation';
 import Footer from '@/components/ui/Footer';
 import SmoothScroll from '@/components/effects/SmoothScroll';
-import CustomCursor from '@/components/effects/CustomCursor';
+import LuxuryCursor from '@/components/effects/LuxuryCursor';
 import FilmGrain from '@/components/effects/FilmGrain';
 import Vignette from '@/components/effects/Vignette';
 import Aurora from '@/components/effects/Aurora';
@@ -12,6 +12,7 @@ import LightRays from '@/components/effects/LightRays';
 import LiquidFilter from '@/components/effects/LiquidFilter';
 import IntroOverlay from '@/components/effects/IntroOverlay';
 import SceneTransition from '@/components/effects/SceneTransition';
+import DepthFog from '@/components/effects/DepthFog';
 
 const serif = Cormorant_Garamond({
   subsets: ['latin'],
@@ -119,9 +120,10 @@ export default function RootLayout({
           <Navigation />
           {children}
           <Footer />
+          <DepthFog />
           <Vignette />
           <FilmGrain />
-          <CustomCursor />
+          <LuxuryCursor />
         </SmoothScroll>
       </body>
     </html>
