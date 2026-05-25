@@ -4,15 +4,9 @@ import './globals.css';
 import Navigation from '@/components/ui/Navigation';
 import Footer from '@/components/ui/Footer';
 import SmoothScroll from '@/components/effects/SmoothScroll';
-import LuxuryCursor from '@/components/effects/LuxuryCursor';
+import MinimalCursor from '@/components/effects/MinimalCursor';
 import FilmGrain from '@/components/effects/FilmGrain';
 import Vignette from '@/components/effects/Vignette';
-import Aurora from '@/components/effects/Aurora';
-import LightRays from '@/components/effects/LightRays';
-import LiquidFilter from '@/components/effects/LiquidFilter';
-import IntroOverlay from '@/components/effects/IntroOverlay';
-import SceneTransition from '@/components/effects/SceneTransition';
-import DepthFog from '@/components/effects/DepthFog';
 
 const serif = Cormorant_Garamond({
   subsets: ['latin'],
@@ -28,7 +22,6 @@ const sans = Inter({
   display: 'swap',
 });
 
-// Strip any BOM / whitespace that some shells inject when piping env values.
 const RAW_SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fresh-catch-restaurant.vercel.app';
 const SITE_URL = RAW_SITE_URL.replace(/^﻿/, '').trim();
@@ -111,19 +104,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${serif.variable} ${sans.variable}`}>
       <body className="bg-navy-950 text-ivory antialiased selection:bg-gold/30 selection:text-ivory">
-        <LiquidFilter />
-        <IntroOverlay />
         <SmoothScroll>
-          <Aurora />
-          <LightRays />
-          <SceneTransition />
           <Navigation />
           {children}
           <Footer />
-          <DepthFog />
           <Vignette />
           <FilmGrain />
-          <LuxuryCursor />
+          <MinimalCursor />
         </SmoothScroll>
       </body>
     </html>
