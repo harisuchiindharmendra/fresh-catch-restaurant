@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Logo from './Logo';
+import { siteConfig } from '@/lib/config';
 
 const links = [
   { label: 'Menu', href: '#dishes' },
@@ -30,8 +32,9 @@ export default function Navigation() {
       }`}
     >
       <nav className="mx-auto max-w-[1500px] px-8 lg:px-16 flex items-center justify-between">
-        <Link href="/" className="group flex items-center gap-4">
-          <span className="font-serif italic text-2xl tracking-wide text-ivory/90 group-hover:text-ivory transition-colors duration-700">
+        <Link href="/" className="group flex items-center gap-4 text-ivory/80 hover:text-ivory transition-colors duration-700">
+          <Logo size={22} className="opacity-80 group-hover:opacity-100 transition-opacity duration-700" />
+          <span className="font-serif italic text-2xl tracking-wide">
             Fresh Catch
           </span>
           <span className="hidden sm:inline-block h-px w-6 bg-ivory/20 group-hover:w-10 group-hover:bg-ivory/45 transition-all duration-700" />
@@ -51,10 +54,10 @@ export default function Navigation() {
         </ul>
 
         <a
-          href="tel:+15552473474"
+          href={`tel:${siteConfig.phone.tel}`}
           className="hidden md:inline-block text-[10px] uppercase tracking-[0.4em] text-ivory/45 hover:text-ivory transition-colors duration-700"
         >
-          +1 555 247 FISH
+          {siteConfig.phone.display}
         </a>
 
         <button
@@ -89,6 +92,14 @@ export default function Navigation() {
                 </a>
               </li>
             ))}
+            <li className="pt-4 border-t border-ivory/5">
+              <a
+                href={`tel:${siteConfig.phone.tel}`}
+                className="text-xs uppercase tracking-[0.4em] text-ivory/55 hover:text-ivory transition-colors"
+              >
+                {siteConfig.phone.display}
+              </a>
+            </li>
           </ul>
         </div>
       )}

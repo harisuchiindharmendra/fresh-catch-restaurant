@@ -103,14 +103,8 @@ export default function SignatureDishes() {
                   <h3 className="spread-fade font-serif text-3xl lg:text-5xl text-ivory font-light leading-[1.05]">
                     {dish.name}
                   </h3>
-                  <p className="spread-fade mt-6 text-ivory/55 text-[15px] leading-[1.9] max-w-sm">
+                  <p className="spread-fade mt-6 text-ivory/55 text-[15px] leading-[1.95] max-w-sm">
                     {dish.description}
-                  </p>
-                  <p className="spread-fade mt-8 text-[10px] uppercase tracking-[0.4em] text-ivory/35">
-                    Paired with
-                  </p>
-                  <p className="spread-fade mt-2 text-sm text-ivory/60 italic font-serif">
-                    {dish.pairing}
                   </p>
                 </div>
               </article>

@@ -1,12 +1,30 @@
 export const siteConfig = {
   name: 'Fresh Catch',
+  legalName: 'Fresh Catch Seafood Restaurant',
   tagline: 'Fresh From The Ocean. Crafted Into Art.',
   description:
-    'An elevated seafood dining experience designed for unforgettable nights.',
-  address: '12 Harbour Lane, Coastal District',
-  phone: '+1 (555) 247-FISH',
-  hours: 'Tuesday — Sunday · 18:00 — 23:30',
+    'An elevated coastal Indian seafood experience in Gokulam, Mysuru.',
+  address: {
+    line1: '2955/3, 5th Main Road',
+    line2: 'Vani Vilas Mohalla, Gokulam',
+    city: 'Mysuru',
+    state: 'Karnataka',
+    postal: '570002',
+  },
+  phone: {
+    display: '+91 821 485 2604',
+    tel: '+918214852604',
+  },
+  hours: {
+    summary: 'Open daily · 12 — 23',
+    detail: 'Tuesday — Sunday · 12 PM – 11 PM',
+  },
   established: 2014,
+  /* TODO — replace # with real Swiggy / Zomato restaurant URLs */
+  order: {
+    swiggy: '#',
+    zomato: '#',
+  },
 };
 
 export const scenes = [
@@ -28,7 +46,7 @@ export const scenes = [
     id: 'chef',
     index: '03',
     title: 'The Chef',
-    caption: 'Twenty years at the pass',
+    caption: 'In conversation',
     chapter: 'Craft',
   },
   {
@@ -55,41 +73,38 @@ export const scenes = [
 ] as const;
 
 /**
- * Signature dishes — swap `image` with `/images/your-file.jpg`
- * after dropping your photo into /public/images/.
+ * Signature dishes — coastal Indian seafood.
+ * Swap `image` with `/images/your-file.jpg` after dropping your photo
+ * into /public/images/.
  */
 export const dishes = [
   {
-    name: 'Hokkaido Scallop',
+    name: 'Tandoori Pomfret',
     description:
-      'Hand-dived, seared rare, finished with brown butter, dashi reduction and a single ribbon of yuzu kosho.',
+      'Whole pomfret marinated overnight in yogurt, kashmiri chilli and ajwain, finished in the clay oven and served with green chutney and burnt lime.',
     image:
-      'https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=1600&q=80',
-    pairing: 'Domaine Leflaive Puligny-Montrachet',
+      'https://images.unsplash.com/photo-1626777553635-94e9d2add9bb?auto=format&fit=crop&w=1600&q=80',
   },
   {
-    name: 'Atlantic Sea Bass',
+    name: 'Mangalorean Fish Curry',
     description:
-      'Salt-baked whole over kelp embers, deboned tableside, finished with herb oil and bone marrow.',
+      'Day-boat seer fish in a coconut-and-kokum gravy fired with byadgi chilli and curry leaf, served with steamed neer dosa.',
     image:
-      'https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=1600&q=80',
-    pairing: 'Krug Grande Cuvée, 171ème Édition',
+      'https://images.unsplash.com/photo-1631292784640-2b24eea8aaad?auto=format&fit=crop&w=1600&q=80',
   },
   {
-    name: 'Octopus, Charred',
+    name: 'Meen Pollichathu',
     description:
-      'Galician octopus over wood fire, smoked paprika, confit fennel, citrus pearls, and aged sherry vinegar.',
+      'Karimeen wrapped in banana leaf with a Keralan masala of shallot, ginger and black pepper, slow-grilled over coconut wood embers.',
     image:
-      'https://images.unsplash.com/photo-1565299507177-b0ac66763828?auto=format&fit=crop&w=1600&q=80',
-    pairing: 'Tinto Pesquera Crianza, 2019',
+      'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=1600&q=80',
   },
   {
-    name: 'Bluefin Toro',
+    name: 'Prawn Ghee Roast',
     description:
-      'Otoro nigiri on aged shari, brushed with a single drop of barrel-aged tamari and finished with wasabi root.',
+      'Mangalore tiger prawns tossed in a hand-pounded byadgi-and-coriander masala finished with country ghee — sweet, smoky, restrained heat.',
     image:
-      'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=1600&q=80',
-    pairing: 'Hibiki 21 Year',
+      'https://images.unsplash.com/photo-1633237308525-cd587cf71926?auto=format&fit=crop&w=1600&q=80',
   },
 ];
 
@@ -105,28 +120,28 @@ export const gallery = [
     span: 'wide' as const,
   },
   {
-    src: 'https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?auto=format&fit=crop&w=1200&q=80',
-    caption: 'Plating',
+    src: 'https://images.unsplash.com/photo-1631292784640-2b24eea8aaad?auto=format&fit=crop&w=1200&q=80',
+    caption: 'Coconut & kokum',
     span: 'normal' as const,
   },
   {
-    src: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=1200&q=80',
-    caption: 'Crudo',
+    src: 'https://images.unsplash.com/photo-1633237308525-cd587cf71926?auto=format&fit=crop&w=1200&q=80',
+    caption: 'Ghee roast',
     span: 'normal' as const,
   },
   {
     src: 'https://images.unsplash.com/photo-1485921325833-c519f76c4927?auto=format&fit=crop&w=1200&q=80',
-    caption: 'Dining Room',
+    caption: 'The Room',
     span: 'wide' as const,
   },
   {
-    src: 'https://images.unsplash.com/photo-1532635241-17e820acc59f?auto=format&fit=crop&w=1200&q=80',
-    caption: 'Cellar',
+    src: 'https://images.unsplash.com/photo-1626777553635-94e9d2add9bb?auto=format&fit=crop&w=1200&q=80',
+    caption: 'Tandoor',
     span: 'tall' as const,
   },
   {
-    src: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=1200&q=80',
-    caption: 'The Bar',
+    src: 'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=1200&q=80',
+    caption: 'Banana leaf',
     span: 'normal' as const,
   },
   {

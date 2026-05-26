@@ -207,6 +207,34 @@
   100% { background-position: 200% 0; }
 }
 
+/*
+ * Date input refinement.
+ * Hide the native "mm/dd/yyyy" / "dd-mm-yyyy" text while the field is empty
+ * (i.e. :invalid because of `required`). Our overlay span carries the
+ * elegant "Select date" placeholder. On focus or once a value is set,
+ * the native edit comes back at full opacity.
+ *
+ * The webkit/blink pseudo-element works on Chrome/Edge/Safari. Firefox
+ * doesn't render that placeholder text by default, so nothing to hide.
+ */
+input.date-input:invalid::-webkit-datetime-edit {
+  opacity: 0;
+}
+input.date-input:focus::-webkit-datetime-edit,
+input.date-input:valid::-webkit-datetime-edit {
+  opacity: 1;
+}
+/* indicator (the small calendar icon) — keep visible at low opacity */
+input.date-input::-webkit-calendar-picker-indicator {
+  opacity: 0.45;
+  cursor: pointer;
+  transition: opacity 400ms ease;
+}
+input.date-input:hover::-webkit-calendar-picker-indicator,
+input.date-input:focus::-webkit-calendar-picker-indicator {
+  opacity: 0.85;
+}
+
 .cursor-ripple {
   width: 14px;
   height: 14px;
