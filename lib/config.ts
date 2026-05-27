@@ -12,18 +12,21 @@ export const siteConfig = {
     postal: '570002',
   },
   phone: {
-    display: '+91 821 485 2604',
-    tel: '+918214852604',
+    display: '0821 485 2604',
+    // Local format only — no +91 anywhere per spec. Works for click-to-call
+    // on Indian devices (0821 is the Mysuru STD code).
+    tel: '08214852604',
   },
   hours: {
     summary: 'Open daily · 12 — 23',
-    detail: 'Tuesday — Sunday · 12 PM – 11 PM',
+    detail: 'Monday — Sunday · 12 PM – 11 PM',
   },
   established: 2014,
-  /* TODO — replace # with real Swiggy / Zomato restaurant URLs */
   order: {
-    swiggy: '#',
-    zomato: '#',
+    swiggy:
+      'https://www.swiggy.com/city/mysore/fresh-catch-sea-food-restaurant-m-g-road-mysore-city-rest69184',
+    zomato:
+      'https://www.zomato.com/mysore/fresh-catch-seafood-restaurant-gokulam',
   },
 };
 
