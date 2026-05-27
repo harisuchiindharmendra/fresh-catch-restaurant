@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { scrollState } from '@/lib/scroll-state';
+import { getReducedMotion, isMobile } from '@/lib/scroll';
 
 /**
  * Cinematic edge lighting. Two large blurred radial gradients sit at
@@ -20,6 +21,13 @@ export default function GoldEdge() {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    // Skip on mobile + reduced motion. The atmosphere is a desktop luxury;
+    // mobile gets a static dark navy bg and saves the RAF cost entirely.
+    if (isMobile() || getReducedMotion()) {
+      el.style.background =
+        'radial-gradient(48% 40% at 78% 22%, rgba(200,168,106,0.10), transparent 70%), radial-gradient(55% 45% at 18% 82%, rgba(35,84,138,0.08), transparent 72%)';
+      return;
+    }
     let raf = 0;
     let t = 0;
     const tick = () => {

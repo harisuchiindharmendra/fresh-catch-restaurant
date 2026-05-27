@@ -109,8 +109,8 @@ export default function Gallery() {
                     sizes="(max-width: 1024px) 100vw, 45vw"
                     placeholder="blur"
                     blurDataURL={BLUR_NAVY}
-                    quality={80}
-                    className="object-cover"
+                    quality={88}
+                    className="object-cover enhance-img"
                   />
                 </div>
                 <figcaption className="mt-4 text-[10px] uppercase tracking-[0.4em] text-ivory/35">

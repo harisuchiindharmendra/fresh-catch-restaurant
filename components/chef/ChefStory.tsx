@@ -119,8 +119,8 @@ export default function ChefStory() {
                 sizes="(max-width: 1024px) 70vw, 32vw"
                 placeholder="blur"
                 blurDataURL={BLUR_NAVY}
-                quality={85}
-                className="object-cover"
+                quality={92}
+                className="object-cover enhance-img"
               />
             </div>
             <div className="absolute inset-0 bg-gradient-to-t from-navy-950/55 via-transparent to-transparent" />

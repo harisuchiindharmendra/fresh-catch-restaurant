@@ -80,18 +80,31 @@ export default function SignatureDishes() {
                 <div
                   className={`spread-image relative col-span-12 lg:col-span-7 ${
                     isEven ? 'lg:col-start-1' : 'lg:col-start-6'
-                  }`}
+                  } flex justify-center`}
                 >
-                  <div className="relative aspect-[4/5] overflow-hidden bg-navy-800/40">
+                  {/* Cap displayed width to the photo's native resolution
+                      so we never up-scale (which was reading as blur).
+                      Matting padding around it gives the editorial frame. */}
+                  <div className="relative aspect-[4/5] overflow-hidden bg-navy-800/40 w-full max-w-[560px]">
                     <Image
                       src={dish.image}
                       alt={dish.name}
                       fill
-                      sizes="(max-width: 1024px) 100vw, 58vw"
+                      sizes="(max-width: 1024px) 90vw, 560px"
                       placeholder="blur"
                       blurDataURL={BLUR_NAVY}
-                      quality={85}
-                      className="object-cover"
+                      quality={90}
+                      priority={i === 0}
+                      className="object-cover enhance-img"
+                    />
+                    {/* very subtle inner vignette — adds depth without darkening too much */}
+                    <div
+                      aria-hidden
+                      className="absolute inset-0 pointer-events-none"
+                      style={{
+                        background:
+                          'radial-gradient(120% 90% at 50% 50%, transparent 60%, rgba(4,9,18,0.22) 100%)',
+                      }}
                     />
                   </div>
                 </div>

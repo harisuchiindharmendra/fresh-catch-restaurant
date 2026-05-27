@@ -74,9 +74,9 @@ export default function DiningExperience() {
             sizes="100vw"
             placeholder="blur"
             blurDataURL={BLUR_NAVY}
-            quality={85}
+            quality={92}
             priority
-            className="object-cover"
+            className="object-cover enhance-img"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-navy-950/45 via-navy-900/20 to-navy-950/85" />
         </div>

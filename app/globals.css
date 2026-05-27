@@ -208,6 +208,16 @@
 }
 
 /*
+ * Image quality lift — a luxury photographer's mild grade applied as
+ * CSS filter. Slight contrast + saturation boost makes lower-res
+ * source photos read as intentional editorial portraits rather than
+ * compressed phone shots. Keeps every image consistent visually.
+ */
+.enhance-img {
+  filter: contrast(1.05) saturate(1.08) brightness(1.015);
+}
+
+/*
  * Date input refinement.
  * Hide the native "mm/dd/yyyy" / "dd-mm-yyyy" text while the field is empty
  * (i.e. :invalid because of `required`). Our overlay span carries the

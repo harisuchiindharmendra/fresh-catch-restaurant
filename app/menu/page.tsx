@@ -86,18 +86,29 @@ export default function MenuPage() {
                         <div
                           className={`col-span-12 sm:col-span-7 ${
                             altRow ? 'lg:col-start-6 lg:col-span-7' : 'lg:col-span-7'
-                          } relative aspect-[4/5] overflow-hidden bg-navy-800/40`}
+                          } flex justify-center`}
                         >
-                          <Image
-                            src={item.image}
-                            alt={item.name}
-                            fill
-                            sizes="(max-width: 1024px) 100vw, 40vw"
-                            placeholder="blur"
-                            blurDataURL={BLUR_NAVY}
-                            quality={85}
-                            className="object-cover"
-                          />
+                          <div className="relative aspect-[4/5] overflow-hidden bg-navy-800/40 w-full max-w-[460px]">
+                            <Image
+                              src={item.image}
+                              alt={item.name}
+                              fill
+                              sizes="(max-width: 1024px) 90vw, 460px"
+                              placeholder="blur"
+                              blurDataURL={BLUR_NAVY}
+                              quality={90}
+                              priority={courseIdx === 0 && idx === 0}
+                              className="object-cover enhance-img"
+                            />
+                            <div
+                              aria-hidden
+                              className="absolute inset-0 pointer-events-none"
+                              style={{
+                                background:
+                                  'radial-gradient(120% 90% at 50% 50%, transparent 60%, rgba(4,9,18,0.22) 100%)',
+                              }}
+                            />
+                          </div>
                         </div>
                       )}
                       <div
