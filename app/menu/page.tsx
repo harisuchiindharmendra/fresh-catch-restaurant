@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
-import { fullMenu, siteConfig } from '@/lib/config';
+import { menuExtended, siteConfig } from '@/lib/config';
+import { BLUR_NAVY } from '@/lib/imagePlaceholder';
 
 export const metadata: Metadata = {
   title: 'The Menu',
@@ -11,9 +13,10 @@ export const metadata: Metadata = {
 /**
  * /menu — dedicated editorial menu route.
  *
- * Not a delivery menu. A reading. Categories lead, intros set the
- * tone, dishes follow as a typographic list. No prices online —
- * luxury restraint. Bottom returns to the reservation CTA.
+ * A reading, not a delivery list. Each course leads with a sticky
+ * title; each dish gets a cinematic image at editorial scale plus
+ * restrained typography. Alternating sides on desktop creates visual
+ * rhythm. No prices online — luxury restraint.
  */
 export default function MenuPage() {
   return (
@@ -48,46 +51,84 @@ export default function MenuPage() {
           </div>
         </header>
 
-        {/* Menu sections */}
-        <div className="grid grid-cols-12 gap-y-32 lg:gap-y-44">
-          {fullMenu.map((section) => (
+        {/* Courses */}
+        <div className="space-y-32 lg:space-y-48">
+          {menuExtended.map((course, courseIdx) => (
             <section
-              key={section.section}
-              className="col-span-12 lg:col-span-10 lg:col-start-2 grid grid-cols-12 gap-x-8 gap-y-10"
+              key={course.course}
+              className="grid grid-cols-12 gap-x-8 gap-y-12"
             >
-              <div className="col-span-12 lg:col-span-4 space-y-6 lg:sticky lg:top-32 lg:self-start">
+              {/* Sticky course title */}
+              <div className="col-span-12 lg:col-span-3 lg:col-start-2 space-y-5 lg:sticky lg:top-32 lg:self-start">
                 <p className="text-[10px] uppercase tracking-[0.5em] text-ivory/40">
-                  {section.section}
+                  Course · 0{courseIdx + 1}
                 </p>
-                <p className="text-[14px] text-ivory/50 leading-[1.95] font-light max-w-xs">
-                  {section.intro}
+                <h2 className="font-serif text-3xl lg:text-4xl text-ivory font-light leading-[1.1]">
+                  {course.course}
+                </h2>
+                <p className="text-[13px] text-ivory/45 leading-[1.95] font-light italic max-w-[260px]">
+                  {course.caption}
                 </p>
               </div>
-              <ul className="col-span-12 lg:col-span-7 lg:col-start-6 space-y-10">
-                {section.items.map((item) => (
-                  <li key={item.name} className="space-y-3">
-                    <h2 className="font-serif text-2xl lg:text-3xl text-ivory/90 font-light leading-tight">
-                      {item.name}
-                    </h2>
-                    <p className="text-[14px] text-ivory/55 leading-[1.85] font-light max-w-md">
-                      {item.description}
-                    </p>
-                  </li>
-                ))}
-              </ul>
+
+              {/* Dish spreads */}
+              <div className="col-span-12 lg:col-span-7 lg:col-start-6 space-y-20 lg:space-y-28">
+                {course.items.map((item, idx) => {
+                  const altRow = idx % 2 === 1;
+                  return (
+                    <article
+                      key={item.name}
+                      className={`grid grid-cols-12 gap-x-6 gap-y-6 items-end ${
+                        altRow ? 'lg:grid-flow-dense' : ''
+                      }`}
+                    >
+                      {item.image && (
+                        <div
+                          className={`col-span-12 sm:col-span-7 ${
+                            altRow ? 'lg:col-start-6 lg:col-span-7' : 'lg:col-span-7'
+                          } relative aspect-[4/5] overflow-hidden bg-navy-800/40`}
+                        >
+                          <Image
+                            src={item.image}
+                            alt={item.name}
+                            fill
+                            sizes="(max-width: 1024px) 100vw, 40vw"
+                            placeholder="blur"
+                            blurDataURL={BLUR_NAVY}
+                            quality={85}
+                            className="object-cover"
+                          />
+                        </div>
+                      )}
+                      <div
+                        className={`col-span-12 sm:col-span-5 ${
+                          altRow ? 'lg:col-start-1 lg:col-span-5 lg:row-start-1' : 'lg:col-span-5'
+                        } pb-3 space-y-4`}
+                      >
+                        <h3 className="font-serif text-2xl lg:text-[28px] text-ivory/95 font-light leading-[1.15]">
+                          {item.name}
+                        </h3>
+                        <p className="text-[14px] text-ivory/55 leading-[1.95] font-light max-w-sm">
+                          {item.description}
+                        </p>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
             </section>
           ))}
         </div>
 
         {/* Tail */}
         <div className="grid grid-cols-12 mt-40 lg:mt-56 pt-12 border-t border-ivory/8">
-          <div className="col-span-12 lg:col-span-8 lg:col-start-2 grid grid-cols-1 lg:grid-cols-3 gap-y-10 gap-x-10">
+          <div className="col-span-12 lg:col-span-10 lg:col-start-2 grid grid-cols-1 lg:grid-cols-3 gap-y-10 gap-x-10">
             <div className="space-y-3">
               <p className="text-[10px] uppercase tracking-[0.5em] text-ivory/40">
                 Open
               </p>
               <p className="text-sm text-ivory/65 font-light leading-[1.85]">
-                {siteConfig.hours.summaryFull}
+                {siteConfig.hours.detail}
               </p>
             </div>
             <div className="space-y-3">

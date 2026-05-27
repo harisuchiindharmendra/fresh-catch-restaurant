@@ -13,14 +13,11 @@ export const siteConfig = {
   },
   phone: {
     display: '0821 485 2604',
-    // Local format only — no +91 anywhere per spec. Works for click-to-call
-    // on Indian devices (0821 is the Mysuru STD code).
-    tel: '08214852604',
+    tel: '+918214852604',
   },
   hours: {
-    summary: '12 PM – 11 PM',
-    summaryFull: 'Open daily · 12 PM – 11 PM',
-    detail: 'Monday — Sunday · 12 PM – 11 PM',
+    summary: '12 PM — 11 PM',
+    detail: 'Open daily · 12 PM to 11 PM',
   },
   established: 2014,
   order: {
@@ -77,205 +74,150 @@ export const scenes = [
 ] as const;
 
 /**
- * Homepage — only the 4 most iconic signature dishes (curated, not
- * a full menu). The dedicated /menu page carries the expanded list.
+ * Homepage signature dishes — curated to four iconic plates.
+ * Photography sourced from the restaurant's own dossier (Mysuru).
  *
- * Swap `image` with `/images/your-file.jpg` after dropping a real
- * photo into /public/images/.
+ * The full menu lives at /menu and pulls from `menuExtended` below.
  */
-/**
- * Each dish image is configured as a primary path (you can swap with your
- * own /images/dishes/*.jpg after dropping files into /public/images/dishes/)
- * and a fallback URL that always renders so the page can never go black.
- *
- * To use your real Fresh Catch photos: drop them at the noted paths
- * and the page picks them up automatically.
- */
-const ph = (label: string) =>
-  `https://placehold.co/1600x2000/07111f/c8a86a/jpeg?text=${encodeURIComponent(
-    label
-  )}&font=playfair`;
-
 export const dishes = [
   {
     name: 'Tandoori Pomfret',
     description:
-      'Whole pomfret marinated overnight in yogurt, kashmiri chilli and ajwain, finished in the clay oven and served with green chutney and burnt lime.',
-    // Drop a real photo at /public/images/dishes/tandoori-pomfret.jpg and
-    // change this to '/images/dishes/tandoori-pomfret.jpg' to use it.
-    image: ph('Tandoori Pomfret'),
+      'Whole pomfret marinated overnight in yogurt, kashmiri chilli and ajwain — finished in the clay oven and served with green chutney and burnt lime.',
+    image: '/images/dishes/tandoori-pomfret.jpg',
   },
   {
     name: 'Mangalorean Fish Curry',
     description:
-      'Day-boat seer fish in a coconut-and-kokum gravy fired with byadgi chilli and curry leaf, served with steamed neer dosa.',
-    image: ph('Mangalorean Fish Curry'),
+      'Day-boat seer fish in a coconut-and-kokum gravy fired with byadgi chilli and curry leaf, served with steamed neer dosa and rice.',
+    image: '/images/dishes/mangalorean-fish-curry.jpg',
   },
   {
     name: 'Meen Pollichathu',
     description:
-      'Karimeen wrapped in banana leaf with a Keralan masala of shallot, ginger and black pepper, slow-grilled over coconut wood embers.',
-    image: ph('Meen Pollichathu'),
+      'Karimeen wrapped in banana leaf with a Keralan masala of shallot, ginger and black pepper — slow-grilled over coconut wood embers.',
+    image: '/images/dishes/meen-pollichathu.jpg',
   },
   {
     name: 'Prawn Ghee Roast',
     description:
       'Mangalore tiger prawns tossed in a hand-pounded byadgi-and-coriander masala finished with country ghee — sweet, smoky, restrained heat.',
-    image: ph('Prawn Ghee Roast'),
+    image: '/images/dishes/prawn-ghee-roast.jpg',
   },
 ];
 
 /**
- * Full menu — used by /menu route. Editorial layout, no prices online.
- * Categorised by preparation, not by protein, so the kitchen leads.
+ * Full menu — additional dishes shown on the dedicated /menu page only.
+ * Group by course for the editorial menu layout.
  */
-export const fullMenu = [
+export type MenuItem = {
+  name: string;
+  description: string;
+  image?: string;
+};
+
+export type MenuCourse = {
+  course: string;
+  caption: string;
+  items: MenuItem[];
+};
+
+export const menuExtended: MenuCourse[] = [
   {
-    section: 'From the Tandoor',
-    intro:
-      'Marinated overnight in yogurt and coastal spices, finished over live charcoal until the edges blacken and the centre stays silken.',
+    course: 'From the Coast',
+    caption: 'Plates that arrive whole, opened at the table.',
     items: [
       {
         name: 'Tandoori Pomfret',
         description:
-          'Whole pomfret with kashmiri chilli, ajwain and lime — served with green chutney and burnt onion.',
+          'Whole pomfret, overnight yogurt marinade, kashmiri chilli, ajwain. Clay oven. Burnt lime, green chutney.',
+        image: '/images/dishes/tandoori-pomfret.jpg',
       },
       {
-        name: 'Tandoori Prawn',
+        name: 'Coastal Grilled Lobster',
         description:
-          'Mangalore tigers marinated in hung curd, ginger and red chilli; finished with chaat masala.',
+          'Whole Karwar lobster split tableside — masala butter, coconut-wood smoke, finished with curry leaf oil.',
+        image: '/images/dishes/coastal-lobster.jpg',
       },
-      {
-        name: 'Tandoori Crab Claws',
-        description:
-          'Cracked claws lacquered in coastal masala, finished over an open flame.',
-      },
-    ],
-  },
-  {
-    section: 'Coastal Curries',
-    intro:
-      'Slow-cooked gravies built on fresh-pressed coconut, kokum and curry leaf — eaten with neer dosa, appam, or steamed rice.',
-    items: [
-      {
-        name: 'Mangalorean Fish Curry',
-        description:
-          'Day-boat seer fish in coconut and kokum, fired with byadgi chilli.',
-      },
-      {
-        name: 'Meen Moilee',
-        description:
-          'Kerala-style stew of king fish in coconut milk, ginger and green chilli — quiet, fragrant, restrained.',
-      },
-      {
-        name: 'Prawn Gassi',
-        description:
-          'Tiger prawns in a thick coconut-and-coriander gravy with tamarind and curry leaf.',
-      },
-      {
-        name: 'Crab Sukka',
-        description:
-          'Half-shell crab in a dry roasted masala of coconut, garlic and red chilli.',
-      },
-    ],
-  },
-  {
-    section: 'Banana Leaf',
-    intro:
-      'Wrapped in fresh leaf with a layer of masala, set over coconut-wood embers — the leaf imparts a sweetness you cannot buy.',
-    items: [
       {
         name: 'Meen Pollichathu',
         description:
-          'Karimeen with Keralan shallot-and-pepper masala, slow grilled over embers.',
-      },
-      {
-        name: 'Banana-leaf Prawn Roast',
-        description:
-          'Marinated prawns folded into the leaf with curry leaf, mustard and green chilli.',
+          'Karimeen in banana leaf — shallot, ginger, black pepper, slow-grilled over coconut embers.',
+        image: '/images/dishes/meen-pollichathu.jpg',
       },
     ],
   },
   {
-    section: 'Dry Preparations',
-    intro:
-      'Hand-pounded masalas finished with country ghee. Eaten alone, slowly, or with a glass of something cold.',
+    course: 'From the Roast',
+    caption: 'Slow heat. Country ghee. Restraint.',
     items: [
       {
         name: 'Prawn Ghee Roast',
         description:
-          'Mangalore tigers in hand-pounded byadgi-and-coriander masala, finished with country ghee — sweet, smoky, restrained heat.',
+          'Mangalore tiger prawns, hand-pounded byadgi masala, country ghee. Sweet smoke, low burn.',
+        image: '/images/dishes/prawn-ghee-roast.jpg',
       },
       {
-        name: 'Squid Pepper Fry',
+        name: 'Crab Pepper Fry',
         description:
-          'Tender rings tossed with crushed black pepper, curry leaf and shallot.',
-      },
-      {
-        name: 'Anchovy Fry',
-        description:
-          'Tiny anchovies dressed in coastal masala and fried crisp on the banana leaf.',
+          'Lady crab from the Mangalore beaches, tellicherry pepper, mustard, fresh curry leaf — finished tawa-side.',
+        image: '/images/dishes/crab-pepper-fry.jpg',
       },
     ],
   },
   {
-    section: 'Of the Day',
-    intro:
-      'What the boats bring in. The list is short when the sea is rough — long when it is kind.',
+    course: 'From the Curry Pot',
+    caption: 'Each pot built from a different sea.',
     items: [
       {
-        name: 'Coastal Lobster Roast',
+        name: 'Mangalorean Fish Curry',
         description:
-          'Whole lobster split and roasted with garlic, curry leaf and pepper — restrained.',
-      },
-      {
-        name: 'Whole Red Snapper',
-        description:
-          'Salt-rubbed and grilled whole, finished with lime and ghee. Carved at the pass.',
+          'Day-boat seer, coconut and kokum, byadgi chilli, curry leaf. Served with neer dosa and rice.',
+        image: '/images/dishes/mangalorean-fish-curry.jpg',
       },
     ],
   },
-] as const;
+];
 
 export const gallery = [
   {
-    src: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80',
-    caption: 'The Pass',
+    src: '/images/gallery/03-kitchen-prep.jpg',
+    caption: 'The Prep',
     span: 'tall' as const,
   },
   {
-    src: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80',
+    src: '/images/gallery/01-storefront-day.jpg',
+    caption: 'Gokulam',
+    span: 'wide' as const,
+  },
+  {
+    src: '/images/gallery/04-market-workers.jpg',
+    caption: 'The Market',
+    span: 'normal' as const,
+  },
+  {
+    src: '/images/gallery/05-ghee-detail.jpg',
+    caption: 'Ghee Roast',
+    span: 'normal' as const,
+  },
+  {
+    src: '/images/gallery/08-octopus-sesame.jpg',
+    caption: 'Finishing',
+    span: 'wide' as const,
+  },
+  {
+    src: '/images/gallery/02-storefront-night.jpg',
+    caption: 'After dark',
+    span: 'tall' as const,
+  },
+  {
+    src: '/images/gallery/07-fish-on-ice.jpg',
+    caption: 'On ice',
+    span: 'normal' as const,
+  },
+  {
+    src: '/images/gallery/06-full-meal.jpg',
     caption: 'Service',
-    span: 'wide' as const,
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1631292784640-2b24eea8aaad?auto=format&fit=crop&w=1200&q=80',
-    caption: 'Coconut & kokum',
-    span: 'normal' as const,
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1633237308525-cd587cf71926?auto=format&fit=crop&w=1200&q=80',
-    caption: 'Ghee roast',
-    span: 'normal' as const,
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1485921325833-c519f76c4927?auto=format&fit=crop&w=1200&q=80',
-    caption: 'The Room',
-    span: 'wide' as const,
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1626777553635-94e9d2add9bb?auto=format&fit=crop&w=1200&q=80',
-    caption: 'Tandoor',
-    span: 'tall' as const,
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=1200&q=80',
-    caption: 'Banana leaf',
-    span: 'normal' as const,
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1606851094291-6efae152bb87?auto=format&fit=crop&w=1200&q=80',
-    caption: 'Detail',
     span: 'normal' as const,
   },
 ];

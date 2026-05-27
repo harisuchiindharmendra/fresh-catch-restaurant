@@ -113,8 +113,8 @@ export default function ChefStory() {
           <div className="chef-portrait relative col-span-12 sm:col-span-7 lg:col-span-4 lg:col-start-2 aspect-[4/5] overflow-hidden bg-navy-800/40">
             <div className="chef-portrait-inner absolute inset-0 -top-8 -bottom-8">
               <Image
-                src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=1200&q=85"
-                alt="Chef Marcus Aurelio"
+                src="/images/chef.jpg"
+                alt="Fresh Catch — at the pass"
                 fill
                 sizes="(max-width: 1024px) 70vw, 32vw"
                 placeholder="blur"

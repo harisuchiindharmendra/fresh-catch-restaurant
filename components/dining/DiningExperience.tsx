@@ -68,13 +68,14 @@ export default function DiningExperience() {
           className="absolute inset-0 -inset-y-[10%] will-change-transform"
         >
           <Image
-            src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=2400&q=85"
-            alt="Restaurant interior"
+            src="/images/dining.jpg"
+            alt="The room"
             fill
             sizes="100vw"
             placeholder="blur"
             blurDataURL={BLUR_NAVY}
             quality={85}
+            priority
             className="object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-navy-950/45 via-navy-900/20 to-navy-950/85" />
