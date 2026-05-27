@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { registerGSAP, gsap, ScrollTrigger } from '@/lib/gsap';
 import { gallery } from '@/lib/config';
+import { BLUR_NAVY } from '@/lib/imagePlaceholder';
 import { useSceneStore } from '@/store/scene-store';
 
 /**
@@ -100,12 +101,15 @@ export default function Gallery() {
                 data-parallax={l.parallax}
                 className={`gallery-frame relative ${l.col} will-change-transform`}
               >
-                <div className={`relative ${l.aspect} overflow-hidden bg-navy-800/30`}>
+                <div className={`relative ${l.aspect} overflow-hidden bg-navy-800/40`}>
                   <Image
                     src={g.src}
                     alt={g.caption}
                     fill
                     sizes="(max-width: 1024px) 100vw, 45vw"
+                    placeholder="blur"
+                    blurDataURL={BLUR_NAVY}
+                    quality={80}
                     className="object-cover"
                   />
                 </div>

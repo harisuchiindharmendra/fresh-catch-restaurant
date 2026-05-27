@@ -8,6 +8,8 @@ const nextConfig = {
     remotePatterns: [
       { protocol: 'https', hostname: 'images.unsplash.com' },
       { protocol: 'https', hostname: 'plus.unsplash.com' },
+      // bulletproof deterministic placeholder host — never deletes, themable
+      { protocol: 'https', hostname: 'placehold.co' },
     ],
     formats: ['image/avif', 'image/webp'],
   },

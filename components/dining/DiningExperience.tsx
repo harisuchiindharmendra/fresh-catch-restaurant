@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { registerGSAP, gsap, ScrollTrigger } from '@/lib/gsap';
+import { BLUR_NAVY } from '@/lib/imagePlaceholder';
 import { useSceneStore } from '@/store/scene-store';
 
 /**
@@ -61,7 +62,7 @@ export default function DiningExperience() {
       className="relative bg-navy-950"
     >
       {/* Big silent image — full bleed, slow dolly */}
-      <div className="relative h-[90vh] lg:h-screen overflow-hidden">
+      <div className="relative h-[90vh] lg:h-screen overflow-hidden bg-navy-800/40">
         <div
           ref={bgRef}
           className="absolute inset-0 -inset-y-[10%] will-change-transform"
@@ -71,6 +72,9 @@ export default function DiningExperience() {
             alt="Restaurant interior"
             fill
             sizes="100vw"
+            placeholder="blur"
+            blurDataURL={BLUR_NAVY}
+            quality={85}
             className="object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-navy-950/45 via-navy-900/20 to-navy-950/85" />

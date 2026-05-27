@@ -83,34 +83,45 @@ export const scenes = [
  * Swap `image` with `/images/your-file.jpg` after dropping a real
  * photo into /public/images/.
  */
+/**
+ * Each dish image is configured as a primary path (you can swap with your
+ * own /images/dishes/*.jpg after dropping files into /public/images/dishes/)
+ * and a fallback URL that always renders so the page can never go black.
+ *
+ * To use your real Fresh Catch photos: drop them at the noted paths
+ * and the page picks them up automatically.
+ */
+const ph = (label: string) =>
+  `https://placehold.co/1600x2000/07111f/c8a86a/jpeg?text=${encodeURIComponent(
+    label
+  )}&font=playfair`;
+
 export const dishes = [
   {
     name: 'Tandoori Pomfret',
     description:
       'Whole pomfret marinated overnight in yogurt, kashmiri chilli and ajwain, finished in the clay oven and served with green chutney and burnt lime.',
-    image:
-      'https://images.unsplash.com/photo-1626777553635-94e9d2add9bb?auto=format&fit=crop&w=1600&q=80',
+    // Drop a real photo at /public/images/dishes/tandoori-pomfret.jpg and
+    // change this to '/images/dishes/tandoori-pomfret.jpg' to use it.
+    image: ph('Tandoori Pomfret'),
   },
   {
     name: 'Mangalorean Fish Curry',
     description:
       'Day-boat seer fish in a coconut-and-kokum gravy fired with byadgi chilli and curry leaf, served with steamed neer dosa.',
-    image:
-      'https://images.unsplash.com/photo-1631292784640-2b24eea8aaad?auto=format&fit=crop&w=1600&q=80',
+    image: ph('Mangalorean Fish Curry'),
   },
   {
     name: 'Meen Pollichathu',
     description:
       'Karimeen wrapped in banana leaf with a Keralan masala of shallot, ginger and black pepper, slow-grilled over coconut wood embers.',
-    image:
-      'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=1600&q=80',
+    image: ph('Meen Pollichathu'),
   },
   {
     name: 'Prawn Ghee Roast',
     description:
       'Mangalore tiger prawns tossed in a hand-pounded byadgi-and-coriander masala finished with country ghee — sweet, smoky, restrained heat.',
-    image:
-      'https://images.unsplash.com/photo-1633237308525-cd587cf71926?auto=format&fit=crop&w=1600&q=80',
+    image: ph('Prawn Ghee Roast'),
   },
 ];
 

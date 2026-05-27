@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { registerGSAP, gsap, ScrollTrigger } from '@/lib/gsap';
 import { dishes } from '@/lib/config';
+import { BLUR_NAVY } from '@/lib/imagePlaceholder';
 import { useSceneStore } from '@/store/scene-store';
 
 /**
@@ -81,12 +82,15 @@ export default function SignatureDishes() {
                     isEven ? 'lg:col-start-1' : 'lg:col-start-6'
                   }`}
                 >
-                  <div className="relative aspect-[4/5] overflow-hidden bg-navy-800/30">
+                  <div className="relative aspect-[4/5] overflow-hidden bg-navy-800/40">
                     <Image
                       src={dish.image}
                       alt={dish.name}
                       fill
                       sizes="(max-width: 1024px) 100vw, 58vw"
+                      placeholder="blur"
+                      blurDataURL={BLUR_NAVY}
+                      quality={85}
                       className="object-cover"
                     />
                   </div>
