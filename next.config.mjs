@@ -8,6 +8,8 @@ const nextConfig = {
     remotePatterns: [
       { protocol: 'https', hostname: 'images.unsplash.com' },
       { protocol: 'https', hostname: 'plus.unsplash.com' },
+      // Pexels — high-resolution editorial food photography
+      { protocol: 'https', hostname: 'images.pexels.com' },
       // bulletproof deterministic placeholder host — never deletes, themable
       { protocol: 'https', hostname: 'placehold.co' },
     ],

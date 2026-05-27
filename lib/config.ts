@@ -74,23 +74,32 @@ export const scenes = [
 ] as const;
 
 /**
- * Homepage signature dishes — curated to four iconic plates.
- * Photography sourced from the restaurant's own dossier (Mysuru).
+ * Homepage signature dishes — four iconic plates.
  *
- * The full menu lives at /menu and pulls from `menuExtended` below.
+ * Three use editorial-grade Pexels photography (3000+ px native) for
+ * Retina-sharp rendering at our 560px display width. The fourth
+ * (Meen Pollichathu) uses the restaurant's authentic banana-leaf shot
+ * because the dish is genuinely served that way — stock would dilute it.
+ *
+ * Authentic restaurant photos remain saved at /public/images/dishes/
+ * for future swap when higher-resolution captures are available.
  */
 export const dishes = [
   {
     name: 'Tandoori Pomfret',
     description:
       'Whole pomfret marinated overnight in yogurt, kashmiri chilli and ajwain — finished in the clay oven and served with green chutney and burnt lime.',
-    image: '/images/dishes/tandoori-pomfret.jpg',
+    image:
+      'https://images.pexels.com/photos/2611917/pexels-photo-2611917.jpeg',
+    // authentic photo (low-res): '/images/dishes/tandoori-pomfret.jpg'
   },
   {
     name: 'Mangalorean Fish Curry',
     description:
       'Day-boat seer fish in a coconut-and-kokum gravy fired with byadgi chilli and curry leaf, served with steamed neer dosa and rice.',
-    image: '/images/dishes/mangalorean-fish-curry.jpg',
+    image:
+      'https://images.pexels.com/photos/7625056/pexels-photo-7625056.jpeg',
+    // authentic photo (low-res): '/images/dishes/mangalorean-fish-curry.jpg'
   },
   {
     name: 'Meen Pollichathu',
@@ -102,7 +111,8 @@ export const dishes = [
     name: 'Prawn Ghee Roast',
     description:
       'Mangalore tiger prawns tossed in a hand-pounded byadgi-and-coriander masala finished with country ghee — sweet, smoky, restrained heat.',
-    image: '/images/dishes/prawn-ghee-roast.jpg',
+    image: 'https://images.pexels.com/photos/725992/pexels-photo-725992.jpeg',
+    // authentic photo (low-res): '/images/dishes/prawn-ghee-roast.jpg'
   },
 ];
 
@@ -131,7 +141,8 @@ export const menuExtended: MenuCourse[] = [
         name: 'Tandoori Pomfret',
         description:
           'Whole pomfret, overnight yogurt marinade, kashmiri chilli, ajwain. Clay oven. Burnt lime, green chutney.',
-        image: '/images/dishes/tandoori-pomfret.jpg',
+        image:
+          'https://images.pexels.com/photos/2611917/pexels-photo-2611917.jpeg',
       },
       {
         name: 'Coastal Grilled Lobster',
@@ -155,7 +166,8 @@ export const menuExtended: MenuCourse[] = [
         name: 'Prawn Ghee Roast',
         description:
           'Mangalore tiger prawns, hand-pounded byadgi masala, country ghee. Sweet smoke, low burn.',
-        image: '/images/dishes/prawn-ghee-roast.jpg',
+        image:
+          'https://images.pexels.com/photos/725992/pexels-photo-725992.jpeg',
       },
       {
         name: 'Crab Pepper Fry',
@@ -173,7 +185,8 @@ export const menuExtended: MenuCourse[] = [
         name: 'Mangalorean Fish Curry',
         description:
           'Day-boat seer, coconut and kokum, byadgi chilli, curry leaf. Served with neer dosa and rice.',
-        image: '/images/dishes/mangalorean-fish-curry.jpg',
+        image:
+          'https://images.pexels.com/photos/7625056/pexels-photo-7625056.jpeg',
       },
     ],
   },
