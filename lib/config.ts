@@ -18,7 +18,8 @@ export const siteConfig = {
     tel: '08214852604',
   },
   hours: {
-    summary: 'Open daily · 12 — 23',
+    summary: '12 PM – 11 PM',
+    summaryFull: 'Open daily · 12 PM – 11 PM',
     detail: 'Monday — Sunday · 12 PM – 11 PM',
   },
   established: 2014,
@@ -76,9 +77,11 @@ export const scenes = [
 ] as const;
 
 /**
- * Signature dishes — coastal Indian seafood.
- * Swap `image` with `/images/your-file.jpg` after dropping your photo
- * into /public/images/.
+ * Homepage — only the 4 most iconic signature dishes (curated, not
+ * a full menu). The dedicated /menu page carries the expanded list.
+ *
+ * Swap `image` with `/images/your-file.jpg` after dropping a real
+ * photo into /public/images/.
  */
 export const dishes = [
   {
@@ -110,6 +113,118 @@ export const dishes = [
       'https://images.unsplash.com/photo-1633237308525-cd587cf71926?auto=format&fit=crop&w=1600&q=80',
   },
 ];
+
+/**
+ * Full menu — used by /menu route. Editorial layout, no prices online.
+ * Categorised by preparation, not by protein, so the kitchen leads.
+ */
+export const fullMenu = [
+  {
+    section: 'From the Tandoor',
+    intro:
+      'Marinated overnight in yogurt and coastal spices, finished over live charcoal until the edges blacken and the centre stays silken.',
+    items: [
+      {
+        name: 'Tandoori Pomfret',
+        description:
+          'Whole pomfret with kashmiri chilli, ajwain and lime — served with green chutney and burnt onion.',
+      },
+      {
+        name: 'Tandoori Prawn',
+        description:
+          'Mangalore tigers marinated in hung curd, ginger and red chilli; finished with chaat masala.',
+      },
+      {
+        name: 'Tandoori Crab Claws',
+        description:
+          'Cracked claws lacquered in coastal masala, finished over an open flame.',
+      },
+    ],
+  },
+  {
+    section: 'Coastal Curries',
+    intro:
+      'Slow-cooked gravies built on fresh-pressed coconut, kokum and curry leaf — eaten with neer dosa, appam, or steamed rice.',
+    items: [
+      {
+        name: 'Mangalorean Fish Curry',
+        description:
+          'Day-boat seer fish in coconut and kokum, fired with byadgi chilli.',
+      },
+      {
+        name: 'Meen Moilee',
+        description:
+          'Kerala-style stew of king fish in coconut milk, ginger and green chilli — quiet, fragrant, restrained.',
+      },
+      {
+        name: 'Prawn Gassi',
+        description:
+          'Tiger prawns in a thick coconut-and-coriander gravy with tamarind and curry leaf.',
+      },
+      {
+        name: 'Crab Sukka',
+        description:
+          'Half-shell crab in a dry roasted masala of coconut, garlic and red chilli.',
+      },
+    ],
+  },
+  {
+    section: 'Banana Leaf',
+    intro:
+      'Wrapped in fresh leaf with a layer of masala, set over coconut-wood embers — the leaf imparts a sweetness you cannot buy.',
+    items: [
+      {
+        name: 'Meen Pollichathu',
+        description:
+          'Karimeen with Keralan shallot-and-pepper masala, slow grilled over embers.',
+      },
+      {
+        name: 'Banana-leaf Prawn Roast',
+        description:
+          'Marinated prawns folded into the leaf with curry leaf, mustard and green chilli.',
+      },
+    ],
+  },
+  {
+    section: 'Dry Preparations',
+    intro:
+      'Hand-pounded masalas finished with country ghee. Eaten alone, slowly, or with a glass of something cold.',
+    items: [
+      {
+        name: 'Prawn Ghee Roast',
+        description:
+          'Mangalore tigers in hand-pounded byadgi-and-coriander masala, finished with country ghee — sweet, smoky, restrained heat.',
+      },
+      {
+        name: 'Squid Pepper Fry',
+        description:
+          'Tender rings tossed with crushed black pepper, curry leaf and shallot.',
+      },
+      {
+        name: 'Anchovy Fry',
+        description:
+          'Tiny anchovies dressed in coastal masala and fried crisp on the banana leaf.',
+      },
+    ],
+  },
+  {
+    section: 'Of the Day',
+    intro:
+      'What the boats bring in. The list is short when the sea is rough — long when it is kind.',
+    items: [
+      {
+        name: 'Coastal Lobster Roast',
+        description:
+          'Whole lobster split and roasted with garlic, curry leaf and pepper — restrained.',
+      },
+      {
+        name: 'Whole Red Snapper',
+        description:
+          'Salt-rubbed and grilled whole, finished with lime and ghee. Carved at the pass.',
+      },
+    ],
+  },
+] as const;
 
 export const gallery = [
   {

@@ -6,11 +6,11 @@ import Logo from './Logo';
 import { siteConfig } from '@/lib/config';
 
 const links = [
-  { label: 'Menu', href: '#dishes' },
-  { label: 'Chef', href: '#chef' },
-  { label: 'Room', href: '#dining' },
-  { label: 'Memory', href: '#gallery' },
-  { label: 'Reserve', href: '#reserve' },
+  { label: 'Menu', href: '/menu' },
+  { label: 'Chef', href: '/#chef' },
+  { label: 'Room', href: '/#dining' },
+  { label: 'Memory', href: '/#gallery' },
+  { label: 'Reserve', href: '/#reserve' },
 ];
 
 export default function Navigation() {

@@ -199,9 +199,10 @@ export default function Reservation() {
                 Hours
               </p>
               <p className="text-[14px] text-ivory/70 leading-[1.85] font-light">
+                <span className="text-ivory/45 text-[11px] uppercase tracking-[0.3em] block mb-1">
+                  Open daily
+                </span>
                 {siteConfig.hours.summary}
-                <br />
-                <span className="text-ivory/40 text-[13px]">All week</span>
               </p>
             </div>
 
